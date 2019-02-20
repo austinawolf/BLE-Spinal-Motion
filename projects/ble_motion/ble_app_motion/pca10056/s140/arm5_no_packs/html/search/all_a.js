@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['my_20personal_20index_20page',['My Personal Index Page',['../index.html',1,'']]],
+  ['m_5fadv_5fuuids',['m_adv_uuids',['../main_8c.html#a7d6bfe1247e91c75571ed1eddb685032',1,'main.c']]],
+  ['m_5fbuffer_5frx',['m_buffer_rx',['../sds__memory_8c.html#aa22bee4682f8440b071eedf8d94ec54c',1,'sds_memory.c']]],
+  ['m_5fbuffer_5ftx',['m_buffer_tx',['../sds__memory_8c.html#a70ef42d52a3db7305b5a94e0f4b45831',1,'sds_memory.c']]],
+  ['m_5fconn_5fhandle',['m_conn_handle',['../main_8c.html#a07ee43d70915ea4e112b7d303258840d',1,'main.c']]],
+  ['main',['main',['../main_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main.c']]],
+  ['main_2ec',['main.c',['../main_8c.html',1,'']]],
+  ['main_2eh',['main.h',['../main_8h.html',1,'']]],
+  ['main_5fcontrol_5fblock_5ft',['main_control_block_t',['../structmain__control__block__t.html',1,'']]],
+  ['manufacturer_5fname',['MANUFACTURER_NAME',['../main_8h.html#aaa2b8f5b105c3019df0cb346f472e803',1,'main.h']]],
+  ['max_5fconn_5finterval',['MAX_CONN_INTERVAL',['../main_8h.html#a7d868ed8adb7d475b463fd8855907a18',1,'main.h']]],
+  ['max_5fconn_5fparams_5fupdate_5fcount',['MAX_CONN_PARAMS_UPDATE_COUNT',['../main_8h.html#a34db81384bfbef23dedbef9bc6dfe46c',1,'main.h']]],
+  ['memory_5fcontrol_5fblock_5ft',['memory_control_block_t',['../structmemory__control__block__t.html',1,'']]],
+  ['memory_5finit_5fs',['memory_init_s',['../structmemory__init__s.html',1,'']]],
+  ['min_5fconn_5finterval',['MIN_CONN_INTERVAL',['../main_8h.html#a95196d5d0f40cf195a6001955d6d98cf',1,'main.h']]],
+  ['motion_5fbsl_5fattr_5fmd',['motion_bsl_attr_md',['../structble__motion__init__t.html#acdeec7610f03da5c0a0e2bc7252ab401',1,'ble_motion_init_t']]],
+  ['motion_5fcontrol_5fblock_5ft',['motion_control_block_t',['../structmotion__control__block__t.html',1,'']]],
+  ['motion_5finit_5ft',['motion_init_t',['../structmotion__init__t.html',1,'']]],
+  ['motion_5fmotionm_5fattr_5fmd',['motion_motionm_attr_md',['../structble__motion__init__t.html#af03b60189a9fdd88ff02b82aa6e653e0',1,'ble_motion_init_t']]],
+  ['motion_5fsample_5fhandler',['motion_sample_handler',['../main_8c.html#a93c4a82757b59e65b40d2a1df86c82f1',1,'main.c']]],
+  ['motion_5fsample_5ft',['motion_sample_t',['../structmotion__sample__t.html',1,'']]],
+  ['motionm_5fhandles',['motionm_handles',['../structble__motion__s.html#a1da99e886537aca874d9d5e583126c0e',1,'ble_motion_s']]],
+  ['mpu_5finit_5ft',['mpu_init_t',['../structmpu__init__t.html',1,'']]]
+];

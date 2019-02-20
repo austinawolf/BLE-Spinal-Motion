@@ -1,0 +1,118 @@
+\hypertarget{sds__command_8c}{}\section{C\+:/\+Users/\+Local\+User/\+Documents/\+Github/\+B\+L\+E\+Spine\+Motion/sds/sds\+\_\+command/sds\+\_\+command.c File Reference}
+\label{sds__command_8c}\index{C:/Users/LocalUser/Documents/Github/BLESpineMotion/sds/sds\_command/sds\_command.c@{C:/Users/LocalUser/Documents/Github/BLESpineMotion/sds/sds\_command/sds\_command.c}}
+{\ttfamily \#include \char`\"{}sds\+\_\+command.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+motion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+log\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+log.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sds__command_8c_aa92c3d2a8adf233eedc3bb45dfc1a182}\label{sds__command_8c_aa92c3d2a8adf233eedc3bb45dfc1a182}} 
+\#define {\bfseries N\+R\+F\+\_\+\+L\+O\+G\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+N\+A\+ME}~cmd
+\item 
+\mbox{\Hypertarget{sds__command_8c_added853d12a17c824ee272797b3de0c7}\label{sds__command_8c_added853d12a17c824ee272797b3de0c7}} 
+\#define {\bfseries N\+R\+F\+\_\+\+L\+O\+G\+\_\+\+L\+E\+V\+EL}~0
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sds__command_8c_ac42d98e42e6acfe14f9d4a2ba5f323c5}\label{sds__command_8c_ac42d98e42e6acfe14f9d4a2ba5f323c5}} 
+{\bfseries N\+R\+F\+\_\+\+L\+O\+G\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+R\+E\+G\+I\+S\+T\+ER} ()
+\item 
+\mbox{\Hypertarget{sds__command_8c_a9535508ca137eb9a795a8d7d38af6d14}\label{sds__command_8c_a9535508ca137eb9a795a8d7d38af6d14}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_a9535508ca137eb9a795a8d7d38af6d14}{get\+\_\+fw\+\_\+version}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and loads response structure with firmware version info \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_ab5883e617299e5d8267524fded51dc8d}\label{sds__command_8c_ab5883e617299e5d8267524fded51dc8d}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_ab5883e617299e5d8267524fded51dc8d}{get\+\_\+sensor\+\_\+location}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and loads response structure with sensor location info \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_a56077ada6f82017c474abdbc547ae3d9}\label{sds__command_8c_a56077ada6f82017c474abdbc547ae3d9}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_a56077ada6f82017c474abdbc547ae3d9}{get\+\_\+sample\+\_\+rate}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and loads response structure with motion sample rate info \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_ac42590baf2081aeb8d3327cb276ba06a}\label{sds__command_8c_ac42590baf2081aeb8d3327cb276ba06a}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_ac42590baf2081aeb8d3327cb276ba06a}{set\+\_\+sample\+\_\+rate}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and sets motion sample rate \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_a66909aba58a4f642124d88a6eccad4d9}\label{sds__command_8c_a66909aba58a4f642124d88a6eccad4d9}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_a66909aba58a4f642124d88a6eccad4d9}{run\+\_\+motion\+\_\+cal}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and runs motion calibration \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_a1e33b4fea6b946644e107e9e32231344}\label{sds__command_8c_a1e33b4fea6b946644e107e9e32231344}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_a1e33b4fea6b946644e107e9e32231344}{get\+\_\+sample\+\_\+state}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and sets motion sample state \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_ad327390c0148fad3c72a89242c45d543}\label{sds__command_8c_ad327390c0148fad3c72a89242c45d543}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_ad327390c0148fad3c72a89242c45d543}{set\+\_\+sample\+\_\+state}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and sets sample state \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_acd94631ec070c5338ec32e008bbc7009}\label{sds__command_8c_acd94631ec070c5338ec32e008bbc7009}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_acd94631ec070c5338ec32e008bbc7009}{start\+\_\+memory\+\_\+session}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and starts a memory session \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_aeaf97d98c454cfb0e1d7a632ff468662}\label{sds__command_8c_aeaf97d98c454cfb0e1d7a632ff468662}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_aeaf97d98c454cfb0e1d7a632ff468662}{stop\+\_\+memory\+\_\+session}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and stops a memory session \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_af1da60ba05720295b389b2638587a657}\label{sds__command_8c_af1da60ba05720295b389b2638587a657}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_af1da60ba05720295b389b2638587a657}{start\+\_\+memory\+\_\+stream}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and starts memory stream \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__command_8c_a0cc8617f6a8734a229eef3c73599e93a}\label{sds__command_8c_a0cc8617f6a8734a229eef3c73599e93a}} 
+static sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_a0cc8617f6a8734a229eef3c73599e93a}{stop\+\_\+memory\+\_\+stop}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em reads command structure and stops memory stream \end{DoxyCompactList}\item 
+sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8c_a4aad45e9c8226f01370adf35a99bcd92}{command\+\_\+call}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em Lookup for getting function pointer from opcode enumaration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static sds\+\_\+return\+\_\+t($\ast$ \mbox{\hyperlink{sds__command_8c_a2861eed55278093afea7c4f0f426287a}{Command\+Set}} \mbox{[}M\+A\+X\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+V\+AL -\/ B\+A\+S\+E\+\_\+\+O\+F\+F\+S\+ET+1\mbox{]})(\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$response)
+\begin{DoxyCompactList}\small\item\em Lookup for getting function pointer from opcode enumaration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{sds__command_8c_a4aad45e9c8226f01370adf35a99bcd92}\label{sds__command_8c_a4aad45e9c8226f01370adf35a99bcd92}} 
+\index{sds\_command.c@{sds\_command.c}!command\_call@{command\_call}}
+\index{command\_call@{command\_call}!sds\_command.c@{sds\_command.c}}
+\subsubsection{\texorpdfstring{command\_call()}{command\_call()}}
+{\footnotesize\ttfamily sds\+\_\+return\+\_\+t command\+\_\+call (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$}]{p\+\_\+command,  }\item[{\mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$}]{p\+\_\+response }\end{DoxyParamCaption})}
+
+
+
+Lookup for getting function pointer from opcode enumaration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+command} & pointer to command structure with command info from central \\
+\hline
+{\em p\+\_\+response} & pointer to response structure where response info will be loaded \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sds error code 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{sds__command_8c_a2861eed55278093afea7c4f0f426287a}\label{sds__command_8c_a2861eed55278093afea7c4f0f426287a}} 
+\index{sds\_command.c@{sds\_command.c}!CommandSet@{CommandSet}}
+\index{CommandSet@{CommandSet}!sds\_command.c@{sds\_command.c}}
+\subsubsection{\texorpdfstring{CommandSet}{CommandSet}}
+{\footnotesize\ttfamily sds\+\_\+return\+\_\+t($\ast$ Command\+Set\mbox{[}M\+A\+X\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+V\+AL -\/ B\+A\+S\+E\+\_\+\+O\+F\+F\+S\+ET + 1\mbox{]})(\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$response)\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_a9535508ca137eb9a795a8d7d38af6d14}{get\_fw\_version}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_ab5883e617299e5d8267524fded51dc8d}{get\_sensor\_location}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_a56077ada6f82017c474abdbc547ae3d9}{get\_sample\_rate}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_ac42590baf2081aeb8d3327cb276ba06a}{set\_sample\_rate}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_a66909aba58a4f642124d88a6eccad4d9}{run\_motion\_cal}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_a1e33b4fea6b946644e107e9e32231344}{get\_sample\_state}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_ad327390c0148fad3c72a89242c45d543}{set\_sample\_state}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_acd94631ec070c5338ec32e008bbc7009}{start\_memory\_session}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_aeaf97d98c454cfb0e1d7a632ff468662}{stop\_memory\_session}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_af1da60ba05720295b389b2638587a657}{start\_memory\_stream}},}
+\DoxyCodeLine{    \mbox{\hyperlink{sds__command_8c_a0cc8617f6a8734a229eef3c73599e93a}{stop\_memory\_stop}},   }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Lookup for getting function pointer from opcode enumaration. 
+

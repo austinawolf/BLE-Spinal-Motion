@@ -1,0 +1,93 @@
+\hypertarget{sds__command_8h}{}\section{C\+:/\+Users/\+Local\+User/\+Documents/\+Github/\+B\+L\+E\+Spine\+Motion/sds/sds\+\_\+command/sds\+\_\+command.h File Reference}
+\label{sds__command_8h}\index{C:/Users/LocalUser/Documents/Github/BLESpineMotion/sds/sds\_command/sds\_command.h@{C:/Users/LocalUser/Documents/Github/BLESpineMotion/sds/sds\_command/sds\_command.h}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sds__command_8h_aa824c2617c09b992a07169e88cc62ec8}\label{sds__command_8h_aa824c2617c09b992a07169e88cc62ec8}} 
+\#define {\bfseries C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+R\+E\+A\+M\+B\+LE}~0xbb
+\item 
+\mbox{\Hypertarget{sds__command_8h_aa71d0bc3503c970e2eca860a16f3e51b}\label{sds__command_8h_aa71d0bc3503c970e2eca860a16f3e51b}} 
+\#define {\bfseries R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+P\+R\+E\+A\+M\+B\+LE}~0xcc
+\item 
+\mbox{\Hypertarget{sds__command_8h_ad08a5ec6e9dadf063918b0afa93e29f7}\label{sds__command_8h_ad08a5ec6e9dadf063918b0afa93e29f7}} 
+\#define {\bfseries M\+I\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+L\+EN}~3
+\item 
+\mbox{\Hypertarget{sds__command_8h_af4d476ddbc7923a704c02b87446b3ad7}\label{sds__command_8h_af4d476ddbc7923a704c02b87446b3ad7}} 
+\#define {\bfseries M\+I\+N\+\_\+\+R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+L\+EN}~4
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sds__command_8h_abbd58864cd5bd143c00f693df019ce47}\label{sds__command_8h_abbd58864cd5bd143c00f693df019ce47}} 
+enum {\bfseries sds\+\_\+return\+\_\+t} \{ \newline
+{\bfseries S\+D\+S\+\_\+\+S\+U\+C\+C\+E\+SS}, 
+{\bfseries S\+D\+S\+\_\+\+E\+R\+R\+OR}, 
+{\bfseries S\+D\+S\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+RG}, 
+{\bfseries S\+D\+S\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+R\+G\+\_\+\+L\+EN}, 
+\newline
+{\bfseries S\+D\+S\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+C\+O\+DE}, 
+{\bfseries S\+D\+S\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+R\+E\+A\+M\+B\+LE}, 
+{\bfseries S\+D\+S\+\_\+\+S\+H\+O\+R\+T\+\_\+\+C\+O\+M\+M\+A\+ND}, 
+{\bfseries S\+D\+S\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+S\+E\+L\+F\+\_\+\+T\+E\+S\+T\+\_\+\+F\+A\+I\+L\+U\+RE}
+ \}
+\item 
+\mbox{\Hypertarget{sds__command_8h_a2d0d2431744a374133c3464bceb87ef7}\label{sds__command_8h_a2d0d2431744a374133c3464bceb87ef7}} 
+enum {\bfseries sds\+\_\+opcode\+\_\+t} \{ \newline
+{\bfseries B\+A\+S\+E\+\_\+\+O\+F\+F\+S\+ET} = 0x20, 
+{\bfseries M\+I\+N\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+V\+AL} = B\+A\+S\+E\+\_\+\+O\+F\+F\+S\+ET, 
+{\bfseries G\+E\+T\+\_\+\+F\+W\+\_\+\+V\+E\+R\+S\+I\+ON} = M\+I\+N\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+V\+AL, 
+{\bfseries G\+E\+T\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+L\+O\+C\+A\+T\+I\+ON}, 
+\newline
+{\bfseries G\+E\+T\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE}, 
+{\bfseries S\+E\+T\+\_\+\+S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE}, 
+{\bfseries R\+U\+N\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+C\+AL}, 
+{\bfseries G\+E\+T\+\_\+\+S\+A\+M\+P\+L\+I\+N\+G\+\_\+\+S\+T\+A\+TE}, 
+\newline
+{\bfseries S\+E\+T\+\_\+\+S\+A\+M\+P\+L\+I\+N\+G\+\_\+\+S\+T\+A\+TE}, 
+{\bfseries S\+T\+A\+R\+T\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+S\+E\+S\+S\+I\+ON}, 
+{\bfseries S\+T\+O\+P\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+S\+E\+S\+S\+I\+ON}, 
+{\bfseries S\+T\+A\+R\+T\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+S\+T\+R\+E\+AM}, 
+\newline
+{\bfseries S\+T\+O\+P\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+S\+T\+R\+E\+AM}, 
+{\bfseries M\+A\+X\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+V\+AL} = S\+T\+O\+P\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+S\+T\+R\+E\+AM
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+sds\+\_\+return\+\_\+t \mbox{\hyperlink{sds__command_8h_a4aad45e9c8226f01370adf35a99bcd92}{command\+\_\+call}} (\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$p\+\_\+command, \mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$p\+\_\+response)
+\begin{DoxyCompactList}\small\item\em Lookup for getting function pointer from opcode enumaration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{sds__command_8h_a4aad45e9c8226f01370adf35a99bcd92}\label{sds__command_8h_a4aad45e9c8226f01370adf35a99bcd92}} 
+\index{sds\_command.h@{sds\_command.h}!command\_call@{command\_call}}
+\index{command\_call@{command\_call}!sds\_command.h@{sds\_command.h}}
+\subsubsection{\texorpdfstring{command\_call()}{command\_call()}}
+{\footnotesize\ttfamily sds\+\_\+return\+\_\+t command\+\_\+call (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsds__command__t}{sds\+\_\+command\+\_\+t}} $\ast$}]{p\+\_\+command,  }\item[{\mbox{\hyperlink{structsds__response__t}{sds\+\_\+response\+\_\+t}} $\ast$}]{p\+\_\+response }\end{DoxyParamCaption})}
+
+
+
+Lookup for getting function pointer from opcode enumaration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+command} & pointer to command structure with command info from central \\
+\hline
+{\em p\+\_\+response} & pointer to response structure where response info will be loaded \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sds error code 
+\end{DoxyReturn}

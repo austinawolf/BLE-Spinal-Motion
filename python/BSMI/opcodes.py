@@ -1,0 +1,15 @@
+#start session
+START_SESSION_BLE = "bb260101"
+START_SESSION_MEMORY = "bb260102"
+START_SESSION_BLE_AND_MEMORY = "bb260103"
+
+#stop session
+STOP_SESSION = "bb2700"
+
+#start stream
+START_STREAM = "bb2800"
+
+#stop stream
+STOP_STREAM = "bb2a00"
+
+GET_FW_VERSION = "bb2000"

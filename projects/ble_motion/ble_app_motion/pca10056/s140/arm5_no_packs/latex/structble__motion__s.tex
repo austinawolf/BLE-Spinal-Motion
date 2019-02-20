@@ -1,0 +1,111 @@
+\hypertarget{structble__motion__s}{}\section{ble\+\_\+motion\+\_\+s Struct Reference}
+\label{structble__motion__s}\index{ble\_motion\_s@{ble\_motion\_s}}
+
+
+Motion Service structure. This contains various status information for the service.  
+
+
+
+
+{\ttfamily \#include $<$sds\+\_\+ble\+\_\+motion.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ble\+\_\+motion\+\_\+evt\+\_\+handler\+\_\+t \mbox{\hyperlink{structble__motion__s_aa576a74bdbf00c090ef2cf0be2cb3f99}{evt\+\_\+handler}}
+\item 
+bool \mbox{\hyperlink{structble__motion__s_a259baa33f4976e5df475993b603c051b}{is\+\_\+expended\+\_\+energy\+\_\+supported}}
+\item 
+bool \mbox{\hyperlink{structble__motion__s_ae2f757a31201086c4e392feee73cbfdd}{is\+\_\+sensor\+\_\+contact\+\_\+supported}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structble__motion__s_afbe22f59669b316e1a5d8d89e4837643}{service\+\_\+handle}}
+\item 
+ble\+\_\+gatts\+\_\+char\+\_\+handles\+\_\+t \mbox{\hyperlink{structble__motion__s_a1da99e886537aca874d9d5e583126c0e}{motionm\+\_\+handles}}
+\item 
+\mbox{\Hypertarget{structble__motion__s_af45acaa8b7db0abda50b686b8af98b73}\label{structble__motion__s_af45acaa8b7db0abda50b686b8af98b73}} 
+ble\+\_\+gatts\+\_\+char\+\_\+handles\+\_\+t {\bfseries command\+\_\+handles}
+\item 
+ble\+\_\+gatts\+\_\+char\+\_\+handles\+\_\+t \mbox{\hyperlink{structble__motion__s_afd1d7f5aa5d5250cf69dab40b47d12a8}{bsl\+\_\+handles}}
+\item 
+ble\+\_\+gatts\+\_\+char\+\_\+handles\+\_\+t \mbox{\hyperlink{structble__motion__s_aa15b65739fed65a16a32cd1ecd611de3}{hrcp\+\_\+handles}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structble__motion__s_a50e8d63fbf3255cf706517bd837b8d60}{conn\+\_\+handle}}
+\item 
+bool \mbox{\hyperlink{structble__motion__s_a527aaa13584aa46834e84346eef94b88}{is\+\_\+sensor\+\_\+contact\+\_\+detected}}
+\item 
+\mbox{\Hypertarget{structble__motion__s_a5ba8b79ab9265d58e0067439e69ebcdc}\label{structble__motion__s_a5ba8b79ab9265d58e0067439e69ebcdc}} 
+uint8\+\_\+t {\bfseries max\+\_\+motionm\+\_\+len}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structble__motion__s_a8ae45e03dea1630dee7f9c4e1fa12a45}{uuid\+\_\+type}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Motion Service structure. This contains various status information for the service. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structble__motion__s_afd1d7f5aa5d5250cf69dab40b47d12a8}\label{structble__motion__s_afd1d7f5aa5d5250cf69dab40b47d12a8}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!bsl\_handles@{bsl\_handles}}
+\index{bsl\_handles@{bsl\_handles}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{bsl\_handles}{bsl\_handles}}
+{\footnotesize\ttfamily ble\+\_\+gatts\+\_\+char\+\_\+handles\+\_\+t ble\+\_\+motion\+\_\+s\+::bsl\+\_\+handles}
+
+Handles related to the Body Sensor Location characteristic. \mbox{\Hypertarget{structble__motion__s_a50e8d63fbf3255cf706517bd837b8d60}\label{structble__motion__s_a50e8d63fbf3255cf706517bd837b8d60}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!conn\_handle@{conn\_handle}}
+\index{conn\_handle@{conn\_handle}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{conn\_handle}{conn\_handle}}
+{\footnotesize\ttfamily uint16\+\_\+t ble\+\_\+motion\+\_\+s\+::conn\+\_\+handle}
+
+Handle of the current connection (as provided by the B\+LE stack, is B\+L\+E\+\_\+\+C\+O\+N\+N\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+V\+A\+L\+ID if not in a connection). \mbox{\Hypertarget{structble__motion__s_aa576a74bdbf00c090ef2cf0be2cb3f99}\label{structble__motion__s_aa576a74bdbf00c090ef2cf0be2cb3f99}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!evt\_handler@{evt\_handler}}
+\index{evt\_handler@{evt\_handler}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{evt\_handler}{evt\_handler}}
+{\footnotesize\ttfamily ble\+\_\+motion\+\_\+evt\+\_\+handler\+\_\+t ble\+\_\+motion\+\_\+s\+::evt\+\_\+handler}
+
+Event handler to be called for handling events in the Motion Service. \mbox{\Hypertarget{structble__motion__s_aa15b65739fed65a16a32cd1ecd611de3}\label{structble__motion__s_aa15b65739fed65a16a32cd1ecd611de3}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!hrcp\_handles@{hrcp\_handles}}
+\index{hrcp\_handles@{hrcp\_handles}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{hrcp\_handles}{hrcp\_handles}}
+{\footnotesize\ttfamily ble\+\_\+gatts\+\_\+char\+\_\+handles\+\_\+t ble\+\_\+motion\+\_\+s\+::hrcp\+\_\+handles}
+
+Handles related to the Motion Control Point characteristic. \mbox{\Hypertarget{structble__motion__s_a259baa33f4976e5df475993b603c051b}\label{structble__motion__s_a259baa33f4976e5df475993b603c051b}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!is\_expended\_energy\_supported@{is\_expended\_energy\_supported}}
+\index{is\_expended\_energy\_supported@{is\_expended\_energy\_supported}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{is\_expended\_energy\_supported}{is\_expended\_energy\_supported}}
+{\footnotesize\ttfamily bool ble\+\_\+motion\+\_\+s\+::is\+\_\+expended\+\_\+energy\+\_\+supported}
+
+T\+R\+UE if Expended Energy measurement is supported. \mbox{\Hypertarget{structble__motion__s_a527aaa13584aa46834e84346eef94b88}\label{structble__motion__s_a527aaa13584aa46834e84346eef94b88}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!is\_sensor\_contact\_detected@{is\_sensor\_contact\_detected}}
+\index{is\_sensor\_contact\_detected@{is\_sensor\_contact\_detected}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{is\_sensor\_contact\_detected}{is\_sensor\_contact\_detected}}
+{\footnotesize\ttfamily bool ble\+\_\+motion\+\_\+s\+::is\+\_\+sensor\+\_\+contact\+\_\+detected}
+
+T\+R\+UE if sensor contact has been detected. \mbox{\Hypertarget{structble__motion__s_ae2f757a31201086c4e392feee73cbfdd}\label{structble__motion__s_ae2f757a31201086c4e392feee73cbfdd}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!is\_sensor\_contact\_supported@{is\_sensor\_contact\_supported}}
+\index{is\_sensor\_contact\_supported@{is\_sensor\_contact\_supported}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{is\_sensor\_contact\_supported}{is\_sensor\_contact\_supported}}
+{\footnotesize\ttfamily bool ble\+\_\+motion\+\_\+s\+::is\+\_\+sensor\+\_\+contact\+\_\+supported}
+
+T\+R\+UE if sensor contact detection is supported. \mbox{\Hypertarget{structble__motion__s_a1da99e886537aca874d9d5e583126c0e}\label{structble__motion__s_a1da99e886537aca874d9d5e583126c0e}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!motionm\_handles@{motionm\_handles}}
+\index{motionm\_handles@{motionm\_handles}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{motionm\_handles}{motionm\_handles}}
+{\footnotesize\ttfamily ble\+\_\+gatts\+\_\+char\+\_\+handles\+\_\+t ble\+\_\+motion\+\_\+s\+::motionm\+\_\+handles}
+
+Handles related to the Motion Measurement characteristic. \mbox{\Hypertarget{structble__motion__s_afbe22f59669b316e1a5d8d89e4837643}\label{structble__motion__s_afbe22f59669b316e1a5d8d89e4837643}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!service\_handle@{service\_handle}}
+\index{service\_handle@{service\_handle}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{service\_handle}{service\_handle}}
+{\footnotesize\ttfamily uint16\+\_\+t ble\+\_\+motion\+\_\+s\+::service\+\_\+handle}
+
+Handle of Motion Service (as provided by the B\+LE stack). \mbox{\Hypertarget{structble__motion__s_a8ae45e03dea1630dee7f9c4e1fa12a45}\label{structble__motion__s_a8ae45e03dea1630dee7f9c4e1fa12a45}} 
+\index{ble\_motion\_s@{ble\_motion\_s}!uuid\_type@{uuid\_type}}
+\index{uuid\_type@{uuid\_type}!ble\_motion\_s@{ble\_motion\_s}}
+\subsubsection{\texorpdfstring{uuid\_type}{uuid\_type}}
+{\footnotesize\ttfamily uint8\+\_\+t ble\+\_\+motion\+\_\+s\+::uuid\+\_\+type}
+
+Current maximum HR measurement length, adjusted according to the current A\+TT M\+TU. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Local\+User/\+Documents/\+Github/\+B\+L\+E\+Spine\+Motion/sds/sds\+\_\+ble\+\_\+services/sds\+\_\+ble\+\_\+motion/sds\+\_\+ble\+\_\+motion.\+h\end{DoxyCompactItemize}

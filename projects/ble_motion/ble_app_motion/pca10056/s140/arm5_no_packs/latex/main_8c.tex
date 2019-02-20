@@ -1,0 +1,415 @@
+\hypertarget{main_8c}{}\section{C\+:/\+Users/\+Local\+User/\+Documents/\+Github/\+B\+L\+E\+Spine\+Motion/projects/ble\+\_\+motion/ble\+\_\+app\+\_\+motion/main.c File Reference}
+\label{main_8c}\index{C:/Users/LocalUser/Documents/Github/BLESpineMotion/projects/ble\_motion/ble\_app\_motion/main.c@{C:/Users/LocalUser/Documents/Github/BLESpineMotion/projects/ble\_motion/ble\_app\_motion/main.c}}
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}nordic\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+sdm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}app\+\_\+error.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+err.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+hci.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+srv\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+advdata.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+advertising.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+bas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+dis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+conn\+\_\+params.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sensorsim.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+sdh.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+sdh\+\_\+ble.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+sdh\+\_\+soc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bsp\+\_\+btn\+\_\+ble.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}peer\+\_\+manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fds.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+ble\+\_\+gatt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ble\+\_\+conn\+\_\+state.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+pwr\+\_\+mgmt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+nvic.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}app\+\_\+scheduler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}app\+\_\+timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+twi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+motion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+ble\+\_\+motion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+clock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+ble\+\_\+uuid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+log\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+log.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+log\+\_\+ctrl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+log\+\_\+default\+\_\+backends.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmain__control__block__t}{main\+\_\+control\+\_\+block\+\_\+t}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8c_aa92c3d2a8adf233eedc3bb45dfc1a182}\label{main_8c_aa92c3d2a8adf233eedc3bb45dfc1a182}} 
+\#define {\bfseries N\+R\+F\+\_\+\+L\+O\+G\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+N\+A\+ME}~\mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}}
+\item 
+\mbox{\Hypertarget{main_8c_added853d12a17c824ee272797b3de0c7}\label{main_8c_added853d12a17c824ee272797b3de0c7}} 
+\#define {\bfseries N\+R\+F\+\_\+\+L\+O\+G\+\_\+\+L\+E\+V\+EL}~0
+\item 
+\mbox{\Hypertarget{main_8c_a0d38c2c674e011b694b53a85ce2e4001}\label{main_8c_a0d38c2c674e011b694b53a85ce2e4001}} 
+\#define {\bfseries D\+A\+T\+A\+\_\+\+D\+E\+S\+T\+\_\+\+B\+L\+E\+\_\+\+C\+E\+N\+T\+R\+AL}~0
+\item 
+\mbox{\Hypertarget{main_8c_a0f5d3226df3021d6407fde7e43ad0b30}\label{main_8c_a0f5d3226df3021d6407fde7e43ad0b30}} 
+\#define {\bfseries D\+A\+T\+A\+\_\+\+D\+E\+S\+T\+\_\+\+M\+E\+M\+O\+RY}~1
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8c_afcfba00ef0a0814b391c9f2eef5c9b4c}\label{main_8c_afcfba00ef0a0814b391c9f2eef5c9b4c}} 
+typedef uint8\+\_\+t {\bfseries data\+\_\+destionation\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8c_ac42d98e42e6acfe14f9d4a2ba5f323c5}\label{main_8c_ac42d98e42e6acfe14f9d4a2ba5f323c5}} 
+{\bfseries N\+R\+F\+\_\+\+L\+O\+G\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+R\+E\+G\+I\+S\+T\+ER} ()
+\item 
+\mbox{\hyperlink{main_8c_adc008f9e15d24268024f196702c1fcaf}{B\+L\+E\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+D\+EF}} (m\+\_\+motion)
+\item 
+\mbox{\hyperlink{main_8c_a1f87ecd8c05f8b14d2a9970c3595493c}{B\+L\+E\+\_\+\+B\+A\+S\+\_\+\+D\+EF}} (m\+\_\+bas)
+\item 
+\mbox{\hyperlink{main_8c_aba49e9b00f1ab33be9506eb83acc1d87}{N\+R\+F\+\_\+\+B\+L\+E\+\_\+\+G\+A\+T\+T\+\_\+\+D\+EF}} (m\+\_\+gatt)
+\item 
+\mbox{\hyperlink{main_8c_aed8448996f9ccf807c629fdb8fff5f89}{B\+L\+E\+\_\+\+A\+D\+V\+E\+R\+T\+I\+S\+I\+N\+G\+\_\+\+D\+EF}} (m\+\_\+advertising)
+\item 
+\mbox{\Hypertarget{main_8c_ae0b363eef1464f7572bf984d6636fbec}\label{main_8c_ae0b363eef1464f7572bf984d6636fbec}} 
+static void {\bfseries on\+\_\+connect} (void)
+\item 
+\mbox{\Hypertarget{main_8c_ac239e07779ef620aa3124292fcb85b77}\label{main_8c_ac239e07779ef620aa3124292fcb85b77}} 
+static void {\bfseries on\+\_\+disconnect} (void)
+\item 
+void \mbox{\hyperlink{main_8c_a4df3b6dd09cac7a9c1705e80fcb735cb}{assert\+\_\+nrf\+\_\+callback}} (uint16\+\_\+t line\+\_\+num, const uint8\+\_\+t $\ast$p\+\_\+file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Callback function for asserts in the Soft\+Device. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_a0705a72cb7bd7d6896f135053070963f}\label{main_8c_a0705a72cb7bd7d6896f135053070963f}} 
+static void \mbox{\hyperlink{main_8c_a0705a72cb7bd7d6896f135053070963f}{delete\+\_\+bonds}} (void)
+\begin{DoxyCompactList}\small\item\em Clear bond information from persistent storage. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_a8b62a119d47b64c64f1352d118888fd3}\label{main_8c_a8b62a119d47b64c64f1352d118888fd3}} 
+void \mbox{\hyperlink{main_8c_a8b62a119d47b64c64f1352d118888fd3}{advertising\+\_\+start}} (bool erase\+\_\+bonds)
+\begin{DoxyCompactList}\small\item\em Function for starting advertising. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a3d7c0b9bfadfcd49fbefeaa55c6e7012}{pm\+\_\+evt\+\_\+handler}} (pm\+\_\+evt\+\_\+t const $\ast$p\+\_\+evt)
+\begin{DoxyCompactList}\small\item\em Function for handling Peer Manager events. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a1004973353f351806e42896c491a5ab2}{gap\+\_\+params\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Function for the G\+AP initialization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_add0e1c95a5d241fbc07f6b41150a1a23}\label{main_8c_add0e1c95a5d241fbc07f6b41150a1a23}} 
+static void \mbox{\hyperlink{main_8c_add0e1c95a5d241fbc07f6b41150a1a23}{gatt\+\_\+evt\+\_\+handler}} (nrf\+\_\+ble\+\_\+gatt\+\_\+t $\ast$p\+\_\+gatt, nrf\+\_\+ble\+\_\+gatt\+\_\+evt\+\_\+t const $\ast$p\+\_\+evt)
+\begin{DoxyCompactList}\small\item\em G\+A\+TT module event handler. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_ab6e3836660d58a5f7e35b7d6f868a25b}\label{main_8c_ab6e3836660d58a5f7e35b7d6f868a25b}} 
+static void \mbox{\hyperlink{main_8c_ab6e3836660d58a5f7e35b7d6f868a25b}{gatt\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Function for initializing the G\+A\+TT module. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a5b27b40e18af00d43b92f57eaed0e9b2}{services\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Function for initializing services that will be used by the application. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a3518a4402961dbde9a52c7de6211ad7a}{on\+\_\+conn\+\_\+params\+\_\+evt}} (ble\+\_\+conn\+\_\+params\+\_\+evt\+\_\+t $\ast$p\+\_\+evt)
+\begin{DoxyCompactList}\small\item\em Function for handling the Connection Parameters Module. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a4538ed130db3bf7fc68b76a4d9e032fa}{conn\+\_\+params\+\_\+error\+\_\+handler}} (uint32\+\_\+t nrf\+\_\+error)
+\begin{DoxyCompactList}\small\item\em Function for handling a Connection Parameters error. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_af61b6c1c47f5c96b169ff81c345d7849}\label{main_8c_af61b6c1c47f5c96b169ff81c345d7849}} 
+static void \mbox{\hyperlink{main_8c_af61b6c1c47f5c96b169ff81c345d7849}{conn\+\_\+params\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Function for initializing the Connection Parameters module. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a438975f6ac624c8570220ab1c842ba1e}{on\+\_\+adv\+\_\+evt}} (ble\+\_\+adv\+\_\+evt\+\_\+t ble\+\_\+adv\+\_\+evt)
+\begin{DoxyCompactList}\small\item\em Function for handling advertising events. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_af79fad11603ce86f991e529e023dc564}{ble\+\_\+evt\+\_\+handler}} (ble\+\_\+evt\+\_\+t const $\ast$p\+\_\+ble\+\_\+evt, void $\ast$p\+\_\+context)
+\begin{DoxyCompactList}\small\item\em Function for handling B\+LE events. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_aa06a7a39e83ec4cf3553f4ed6ba6323a}{ble\+\_\+stack\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Function for initializing the B\+LE stack. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_a6c69f32d7006096dc75ddf2d036a91d0}\label{main_8c_a6c69f32d7006096dc75ddf2d036a91d0}} 
+static void \mbox{\hyperlink{main_8c_a6c69f32d7006096dc75ddf2d036a91d0}{peer\+\_\+manager\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Function for the Peer Manager initialization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_a935c9624de0709fe228dbefa4b54de48}\label{main_8c_a935c9624de0709fe228dbefa4b54de48}} 
+static void \mbox{\hyperlink{main_8c_a935c9624de0709fe228dbefa4b54de48}{advertising\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Function for initializing the Advertising functionality. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a22ac6b4aa31eb37eb73d3f2a4983a121}{bsp\+\_\+event\+\_\+handler}} (bsp\+\_\+event\+\_\+t event)
+\begin{DoxyCompactList}\small\item\em Function for handling events from the B\+SP module. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_ada967b353ba42e8061e8fdb343bf74e7}{buttons\+\_\+leds\+\_\+init}} (bool $\ast$p\+\_\+erase\+\_\+bonds)
+\begin{DoxyCompactList}\small\item\em Function for initializing buttons and leds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_a8cbf849de9da0b561bc201d34343e63b}\label{main_8c_a8cbf849de9da0b561bc201d34343e63b}} 
+static void \mbox{\hyperlink{main_8c_a8cbf849de9da0b561bc201d34343e63b}{log\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Function for initializing the nrf log module. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{main_8c_a93c4a82757b59e65b40d2a1df86c82f1}{motion\+\_\+sample\+\_\+handler}} (void $\ast$p\+\_\+context)
+\begin{DoxyCompactList}\small\item\em Function for handling the Heart rate measurement timer timeout. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_a546de8b56ec3f89b39683bd26346be8c}\label{main_8c_a546de8b56ec3f89b39683bd26346be8c}} 
+void {\bfseries memory\+\_\+event\+\_\+handler} (sds\+\_\+memory\+\_\+evt\+\_\+t event, void $\ast$p\+\_\+context)
+\item 
+int \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structmain__control__block__t}{main\+\_\+control\+\_\+block\+\_\+t}} {\bfseries cb}
+\item 
+static uint16\+\_\+t \mbox{\hyperlink{main_8c_a07ee43d70915ea4e112b7d303258840d}{m\+\_\+conn\+\_\+handle}} = B\+L\+E\+\_\+\+C\+O\+N\+N\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+V\+A\+L\+ID
+\item 
+static ble\+\_\+uuid\+\_\+t \mbox{\hyperlink{main_8c_a7d6bfe1247e91c75571ed1eddb685032}{m\+\_\+adv\+\_\+uuids}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{main_8c_a4df3b6dd09cac7a9c1705e80fcb735cb}\label{main_8c_a4df3b6dd09cac7a9c1705e80fcb735cb}} 
+\index{main.c@{main.c}!assert\_nrf\_callback@{assert\_nrf\_callback}}
+\index{assert\_nrf\_callback@{assert\_nrf\_callback}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{assert\_nrf\_callback()}{assert\_nrf\_callback()}}
+{\footnotesize\ttfamily void assert\+\_\+nrf\+\_\+callback (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{line\+\_\+num,  }\item[{const uint8\+\_\+t $\ast$}]{p\+\_\+file\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Callback function for asserts in the Soft\+Device. 
+
+This function will be called in case of an assert in the Soft\+Device.
+
+\begin{DoxyWarning}{Warning}
+This handler is an example only and does not fit a final product. You need to analyze how your product is supposed to react in case of Assert. 
+
+On assert from the Soft\+Device, the system can only recover on reset.
+\end{DoxyWarning}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em line\+\_\+num} & Line number of the failing A\+S\+S\+E\+RT call. \\
+\hline
+\mbox{\texttt{ in}}  & {\em file\+\_\+name} & File name of the failing A\+S\+S\+E\+RT call. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_aed8448996f9ccf807c629fdb8fff5f89}\label{main_8c_aed8448996f9ccf807c629fdb8fff5f89}} 
+\index{main.c@{main.c}!BLE\_ADVERTISING\_DEF@{BLE\_ADVERTISING\_DEF}}
+\index{BLE\_ADVERTISING\_DEF@{BLE\_ADVERTISING\_DEF}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{BLE\_ADVERTISING\_DEF()}{BLE\_ADVERTISING\_DEF()}}
+{\footnotesize\ttfamily B\+L\+E\+\_\+\+A\+D\+V\+E\+R\+T\+I\+S\+I\+N\+G\+\_\+\+D\+EF (\begin{DoxyParamCaption}\item[{m\+\_\+advertising}]{ }\end{DoxyParamCaption})}
+
+Advertising module instance. \mbox{\Hypertarget{main_8c_a1f87ecd8c05f8b14d2a9970c3595493c}\label{main_8c_a1f87ecd8c05f8b14d2a9970c3595493c}} 
+\index{main.c@{main.c}!BLE\_BAS\_DEF@{BLE\_BAS\_DEF}}
+\index{BLE\_BAS\_DEF@{BLE\_BAS\_DEF}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{BLE\_BAS\_DEF()}{BLE\_BAS\_DEF()}}
+{\footnotesize\ttfamily B\+L\+E\+\_\+\+B\+A\+S\+\_\+\+D\+EF (\begin{DoxyParamCaption}\item[{m\+\_\+bas}]{ }\end{DoxyParamCaption})}
+
+Structure used to identify the battery service. \mbox{\Hypertarget{main_8c_af79fad11603ce86f991e529e023dc564}\label{main_8c_af79fad11603ce86f991e529e023dc564}} 
+\index{main.c@{main.c}!ble\_evt\_handler@{ble\_evt\_handler}}
+\index{ble\_evt\_handler@{ble\_evt\_handler}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{ble\_evt\_handler()}{ble\_evt\_handler()}}
+{\footnotesize\ttfamily static void ble\+\_\+evt\+\_\+handler (\begin{DoxyParamCaption}\item[{ble\+\_\+evt\+\_\+t const $\ast$}]{p\+\_\+ble\+\_\+evt,  }\item[{void $\ast$}]{p\+\_\+context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for handling B\+LE events. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p\+\_\+ble\+\_\+evt} & Bluetooth stack event. \\
+\hline
+\mbox{\texttt{ in}}  & {\em p\+\_\+context} & Unused. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_adc008f9e15d24268024f196702c1fcaf}\label{main_8c_adc008f9e15d24268024f196702c1fcaf}} 
+\index{main.c@{main.c}!BLE\_MOTION\_DEF@{BLE\_MOTION\_DEF}}
+\index{BLE\_MOTION\_DEF@{BLE\_MOTION\_DEF}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{BLE\_MOTION\_DEF()}{BLE\_MOTION\_DEF()}}
+{\footnotesize\ttfamily B\+L\+E\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+D\+EF (\begin{DoxyParamCaption}\item[{m\+\_\+motion}]{ }\end{DoxyParamCaption})}
+
+Motion service instance. \mbox{\Hypertarget{main_8c_aa06a7a39e83ec4cf3553f4ed6ba6323a}\label{main_8c_aa06a7a39e83ec4cf3553f4ed6ba6323a}} 
+\index{main.c@{main.c}!ble\_stack\_init@{ble\_stack\_init}}
+\index{ble\_stack\_init@{ble\_stack\_init}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{ble\_stack\_init()}{ble\_stack\_init()}}
+{\footnotesize\ttfamily static void ble\+\_\+stack\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for initializing the B\+LE stack. 
+
+Initializes the Soft\+Device and the B\+LE event interrupt. \mbox{\Hypertarget{main_8c_a22ac6b4aa31eb37eb73d3f2a4983a121}\label{main_8c_a22ac6b4aa31eb37eb73d3f2a4983a121}} 
+\index{main.c@{main.c}!bsp\_event\_handler@{bsp\_event\_handler}}
+\index{bsp\_event\_handler@{bsp\_event\_handler}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{bsp\_event\_handler()}{bsp\_event\_handler()}}
+{\footnotesize\ttfamily void bsp\+\_\+event\+\_\+handler (\begin{DoxyParamCaption}\item[{bsp\+\_\+event\+\_\+t}]{event }\end{DoxyParamCaption})}
+
+
+
+Function for handling events from the B\+SP module. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em event} & Event generated by button press. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_ada967b353ba42e8061e8fdb343bf74e7}\label{main_8c_ada967b353ba42e8061e8fdb343bf74e7}} 
+\index{main.c@{main.c}!buttons\_leds\_init@{buttons\_leds\_init}}
+\index{buttons\_leds\_init@{buttons\_leds\_init}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{buttons\_leds\_init()}{buttons\_leds\_init()}}
+{\footnotesize\ttfamily static void buttons\+\_\+leds\+\_\+init (\begin{DoxyParamCaption}\item[{bool $\ast$}]{p\+\_\+erase\+\_\+bonds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for initializing buttons and leds. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em p\+\_\+erase\+\_\+bonds} & Will be true if the clear bonding button was pressed to wake the application up. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a4538ed130db3bf7fc68b76a4d9e032fa}\label{main_8c_a4538ed130db3bf7fc68b76a4d9e032fa}} 
+\index{main.c@{main.c}!conn\_params\_error\_handler@{conn\_params\_error\_handler}}
+\index{conn\_params\_error\_handler@{conn\_params\_error\_handler}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{conn\_params\_error\_handler()}{conn\_params\_error\_handler()}}
+{\footnotesize\ttfamily static void conn\+\_\+params\+\_\+error\+\_\+handler (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{nrf\+\_\+error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for handling a Connection Parameters error. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em nrf\+\_\+error} & Error code containing information about what went wrong. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a1004973353f351806e42896c491a5ab2}\label{main_8c_a1004973353f351806e42896c491a5ab2}} 
+\index{main.c@{main.c}!gap\_params\_init@{gap\_params\_init}}
+\index{gap\_params\_init@{gap\_params\_init}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{gap\_params\_init()}{gap\_params\_init()}}
+{\footnotesize\ttfamily static void gap\+\_\+params\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for the G\+AP initialization. 
+
+This function sets up all the necessary G\+AP (Generic Access Profile) parameters of the device including the device name, appearance, and the preferred connection parameters. \mbox{\Hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+My function doing something... 
+\begin{DoxyParams}{Parameters}
+{\em param1} & first parameter \\
+\hline
+{\em param2} & second parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value return value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8c_a93c4a82757b59e65b40d2a1df86c82f1}\label{main_8c_a93c4a82757b59e65b40d2a1df86c82f1}} 
+\index{main.c@{main.c}!motion\_sample\_handler@{motion\_sample\_handler}}
+\index{motion\_sample\_handler@{motion\_sample\_handler}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{motion\_sample\_handler()}{motion\_sample\_handler()}}
+{\footnotesize\ttfamily static void motion\+\_\+sample\+\_\+handler (\begin{DoxyParamCaption}\item[{void $\ast$}]{p\+\_\+context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for handling the Heart rate measurement timer timeout. 
+
+This function will be called each time the heart rate measurement timer expires. It will exclude RR Interval data from every third measurement.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p\+\_\+context} & Pointer used for passing some arbitrary information (context) from the app\+\_\+start\+\_\+timer() call to the timeout handler. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_aba49e9b00f1ab33be9506eb83acc1d87}\label{main_8c_aba49e9b00f1ab33be9506eb83acc1d87}} 
+\index{main.c@{main.c}!NRF\_BLE\_GATT\_DEF@{NRF\_BLE\_GATT\_DEF}}
+\index{NRF\_BLE\_GATT\_DEF@{NRF\_BLE\_GATT\_DEF}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{NRF\_BLE\_GATT\_DEF()}{NRF\_BLE\_GATT\_DEF()}}
+{\footnotesize\ttfamily N\+R\+F\+\_\+\+B\+L\+E\+\_\+\+G\+A\+T\+T\+\_\+\+D\+EF (\begin{DoxyParamCaption}\item[{m\+\_\+gatt}]{ }\end{DoxyParamCaption})}
+
+G\+A\+TT module instance. \mbox{\Hypertarget{main_8c_a438975f6ac624c8570220ab1c842ba1e}\label{main_8c_a438975f6ac624c8570220ab1c842ba1e}} 
+\index{main.c@{main.c}!on\_adv\_evt@{on\_adv\_evt}}
+\index{on\_adv\_evt@{on\_adv\_evt}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{on\_adv\_evt()}{on\_adv\_evt()}}
+{\footnotesize\ttfamily static void on\+\_\+adv\+\_\+evt (\begin{DoxyParamCaption}\item[{ble\+\_\+adv\+\_\+evt\+\_\+t}]{ble\+\_\+adv\+\_\+evt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for handling advertising events. 
+
+This function will be called for advertising events which are passed to the application.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em ble\+\_\+adv\+\_\+evt} & Advertising event. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a3518a4402961dbde9a52c7de6211ad7a}\label{main_8c_a3518a4402961dbde9a52c7de6211ad7a}} 
+\index{main.c@{main.c}!on\_conn\_params\_evt@{on\_conn\_params\_evt}}
+\index{on\_conn\_params\_evt@{on\_conn\_params\_evt}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{on\_conn\_params\_evt()}{on\_conn\_params\_evt()}}
+{\footnotesize\ttfamily static void on\+\_\+conn\+\_\+params\+\_\+evt (\begin{DoxyParamCaption}\item[{ble\+\_\+conn\+\_\+params\+\_\+evt\+\_\+t $\ast$}]{p\+\_\+evt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for handling the Connection Parameters Module. 
+
+This function will be called for all events in the Connection Parameters Module which are passed to the application. \begin{DoxyNote}{Note}
+All this function does is to disconnect. This could have been done by simply setting the disconnect\+\_\+on\+\_\+fail config parameter, but instead we use the event handler mechanism to demonstrate its use.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p\+\_\+evt} & Event received from the Connection Parameters Module. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a3d7c0b9bfadfcd49fbefeaa55c6e7012}\label{main_8c_a3d7c0b9bfadfcd49fbefeaa55c6e7012}} 
+\index{main.c@{main.c}!pm\_evt\_handler@{pm\_evt\_handler}}
+\index{pm\_evt\_handler@{pm\_evt\_handler}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{pm\_evt\_handler()}{pm\_evt\_handler()}}
+{\footnotesize\ttfamily static void pm\+\_\+evt\+\_\+handler (\begin{DoxyParamCaption}\item[{pm\+\_\+evt\+\_\+t const $\ast$}]{p\+\_\+evt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for handling Peer Manager events. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p\+\_\+evt} & Peer Manager event. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a5b27b40e18af00d43b92f57eaed0e9b2}\label{main_8c_a5b27b40e18af00d43b92f57eaed0e9b2}} 
+\index{main.c@{main.c}!services\_init@{services\_init}}
+\index{services\_init@{services\_init}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{services\_init()}{services\_init()}}
+{\footnotesize\ttfamily static void services\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for initializing services that will be used by the application. 
+
+Initialize the Heart Rate, Battery and Device Information services. 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{main_8c_adbcdd1c10f47bb1cdf5d06dba931d67a}\label{main_8c_adbcdd1c10f47bb1cdf5d06dba931d67a}} 
+\index{main.c@{main.c}!cb@{cb}}
+\index{cb@{cb}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{cb}{cb}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmain__control__block__t}{main\+\_\+control\+\_\+block\+\_\+t}} cb\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    .data\_destination = DATA\_DEST\_BLE\_CENTRAL,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{main_8c_a7d6bfe1247e91c75571ed1eddb685032}\label{main_8c_a7d6bfe1247e91c75571ed1eddb685032}} 
+\index{main.c@{main.c}!m\_adv\_uuids@{m\_adv\_uuids}}
+\index{m\_adv\_uuids@{m\_adv\_uuids}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{m\_adv\_uuids}{m\_adv\_uuids}}
+{\footnotesize\ttfamily ble\+\_\+uuid\+\_\+t m\+\_\+adv\+\_\+uuids\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \{BLE\_UUID\_MOTION\_SERVICE,               BLE\_UUID\_TYPE\_BLE\},}
+\DoxyCodeLine{    \{BLE\_UUID\_BATTERY\_SERVICE,              BLE\_UUID\_TYPE\_BLE\},}
+\DoxyCodeLine{    \{BLE\_UUID\_DEVICE\_INFORMATION\_SERVICE,   BLE\_UUID\_TYPE\_BLE\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Universally unique service identifiers. \mbox{\Hypertarget{main_8c_a07ee43d70915ea4e112b7d303258840d}\label{main_8c_a07ee43d70915ea4e112b7d303258840d}} 
+\index{main.c@{main.c}!m\_conn\_handle@{m\_conn\_handle}}
+\index{m\_conn\_handle@{m\_conn\_handle}!main.c@{main.c}}
+\subsubsection{\texorpdfstring{m\_conn\_handle}{m\_conn\_handle}}
+{\footnotesize\ttfamily uint16\+\_\+t m\+\_\+conn\+\_\+handle = B\+L\+E\+\_\+\+C\+O\+N\+N\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+V\+A\+L\+ID\hspace{0.3cm}{\ttfamily [static]}}
+
+Handle of the current connection. 

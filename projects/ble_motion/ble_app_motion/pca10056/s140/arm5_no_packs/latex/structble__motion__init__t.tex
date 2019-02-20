@@ -1,0 +1,65 @@
+\hypertarget{structble__motion__init__t}{}\section{ble\+\_\+motion\+\_\+init\+\_\+t Struct Reference}
+\label{structble__motion__init__t}\index{ble\_motion\_init\_t@{ble\_motion\_init\_t}}
+
+
+Motion Service init structure. This contains all options and data needed for initialization of the service.  
+
+
+
+
+{\ttfamily \#include $<$sds\+\_\+ble\+\_\+motion.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ble\+\_\+motion\+\_\+evt\+\_\+handler\+\_\+t \mbox{\hyperlink{structble__motion__init__t_a0da970014701e383ba7b029169ce6d25}{evt\+\_\+handler}}
+\item 
+bool \mbox{\hyperlink{structble__motion__init__t_af686b9dc2dcb378cba8b706c568efe5b}{is\+\_\+sensor\+\_\+contact\+\_\+supported}}
+\item 
+uint8\+\_\+t $\ast$ \mbox{\hyperlink{structble__motion__init__t_a6a7d65af831d1d0d9d1714a0b1d657a0}{p\+\_\+body\+\_\+sensor\+\_\+location}}
+\item 
+ble\+\_\+srv\+\_\+cccd\+\_\+security\+\_\+mode\+\_\+t \mbox{\hyperlink{structble__motion__init__t_af03b60189a9fdd88ff02b82aa6e653e0}{motion\+\_\+motionm\+\_\+attr\+\_\+md}}
+\item 
+ble\+\_\+srv\+\_\+security\+\_\+mode\+\_\+t \mbox{\hyperlink{structble__motion__init__t_acdeec7610f03da5c0a0e2bc7252ab401}{motion\+\_\+bsl\+\_\+attr\+\_\+md}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Motion Service init structure. This contains all options and data needed for initialization of the service. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structble__motion__init__t_a0da970014701e383ba7b029169ce6d25}\label{structble__motion__init__t_a0da970014701e383ba7b029169ce6d25}} 
+\index{ble\_motion\_init\_t@{ble\_motion\_init\_t}!evt\_handler@{evt\_handler}}
+\index{evt\_handler@{evt\_handler}!ble\_motion\_init\_t@{ble\_motion\_init\_t}}
+\subsubsection{\texorpdfstring{evt\_handler}{evt\_handler}}
+{\footnotesize\ttfamily ble\+\_\+motion\+\_\+evt\+\_\+handler\+\_\+t ble\+\_\+motion\+\_\+init\+\_\+t\+::evt\+\_\+handler}
+
+Event handler to be called for handling events in the Motion Service. \mbox{\Hypertarget{structble__motion__init__t_af686b9dc2dcb378cba8b706c568efe5b}\label{structble__motion__init__t_af686b9dc2dcb378cba8b706c568efe5b}} 
+\index{ble\_motion\_init\_t@{ble\_motion\_init\_t}!is\_sensor\_contact\_supported@{is\_sensor\_contact\_supported}}
+\index{is\_sensor\_contact\_supported@{is\_sensor\_contact\_supported}!ble\_motion\_init\_t@{ble\_motion\_init\_t}}
+\subsubsection{\texorpdfstring{is\_sensor\_contact\_supported}{is\_sensor\_contact\_supported}}
+{\footnotesize\ttfamily bool ble\+\_\+motion\+\_\+init\+\_\+t\+::is\+\_\+sensor\+\_\+contact\+\_\+supported}
+
+Determines if sensor contact detection is to be supported. \mbox{\Hypertarget{structble__motion__init__t_acdeec7610f03da5c0a0e2bc7252ab401}\label{structble__motion__init__t_acdeec7610f03da5c0a0e2bc7252ab401}} 
+\index{ble\_motion\_init\_t@{ble\_motion\_init\_t}!motion\_bsl\_attr\_md@{motion\_bsl\_attr\_md}}
+\index{motion\_bsl\_attr\_md@{motion\_bsl\_attr\_md}!ble\_motion\_init\_t@{ble\_motion\_init\_t}}
+\subsubsection{\texorpdfstring{motion\_bsl\_attr\_md}{motion\_bsl\_attr\_md}}
+{\footnotesize\ttfamily ble\+\_\+srv\+\_\+security\+\_\+mode\+\_\+t ble\+\_\+motion\+\_\+init\+\_\+t\+::motion\+\_\+bsl\+\_\+attr\+\_\+md}
+
+Initial security level for body sensor location attribute \mbox{\Hypertarget{structble__motion__init__t_af03b60189a9fdd88ff02b82aa6e653e0}\label{structble__motion__init__t_af03b60189a9fdd88ff02b82aa6e653e0}} 
+\index{ble\_motion\_init\_t@{ble\_motion\_init\_t}!motion\_motionm\_attr\_md@{motion\_motionm\_attr\_md}}
+\index{motion\_motionm\_attr\_md@{motion\_motionm\_attr\_md}!ble\_motion\_init\_t@{ble\_motion\_init\_t}}
+\subsubsection{\texorpdfstring{motion\_motionm\_attr\_md}{motion\_motionm\_attr\_md}}
+{\footnotesize\ttfamily ble\+\_\+srv\+\_\+cccd\+\_\+security\+\_\+mode\+\_\+t ble\+\_\+motion\+\_\+init\+\_\+t\+::motion\+\_\+motionm\+\_\+attr\+\_\+md}
+
+Initial security level for Motion service measurement attribute \mbox{\Hypertarget{structble__motion__init__t_a6a7d65af831d1d0d9d1714a0b1d657a0}\label{structble__motion__init__t_a6a7d65af831d1d0d9d1714a0b1d657a0}} 
+\index{ble\_motion\_init\_t@{ble\_motion\_init\_t}!p\_body\_sensor\_location@{p\_body\_sensor\_location}}
+\index{p\_body\_sensor\_location@{p\_body\_sensor\_location}!ble\_motion\_init\_t@{ble\_motion\_init\_t}}
+\subsubsection{\texorpdfstring{p\_body\_sensor\_location}{p\_body\_sensor\_location}}
+{\footnotesize\ttfamily uint8\+\_\+t$\ast$ ble\+\_\+motion\+\_\+init\+\_\+t\+::p\+\_\+body\+\_\+sensor\+\_\+location}
+
+If not N\+U\+LL, initial value of the Body Sensor Location characteristic. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Local\+User/\+Documents/\+Github/\+B\+L\+E\+Spine\+Motion/sds/sds\+\_\+ble\+\_\+services/sds\+\_\+ble\+\_\+motion/sds\+\_\+ble\+\_\+motion.\+h\end{DoxyCompactItemize}

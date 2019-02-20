@@ -1,0 +1,248 @@
+\hypertarget{sds__memory_8c}{}\section{C\+:/\+Users/\+Local\+User/\+Documents/\+Github/\+B\+L\+E\+Spine\+Motion/sds/sds\+\_\+memory/sds\+\_\+memory.c File Reference}
+\label{sds__memory_8c}\index{C:/Users/LocalUser/Documents/Github/BLESpineMotion/sds/sds\_memory/sds\_memory.c@{C:/Users/LocalUser/Documents/Github/BLESpineMotion/sds/sds\_memory/sds\_memory.c}}
+{\ttfamily \#include \char`\"{}sds\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+drv\+\_\+qspi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+delay.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sds\+\_\+clock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nrf\+\_\+log.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sds__memory_8c_ac285732cc2afdf02c4b3695a376e9131}\label{sds__memory_8c_ac285732cc2afdf02c4b3695a376e9131}} 
+\#define {\bfseries Q\+S\+P\+I\+\_\+\+S\+T\+D\+\_\+\+C\+M\+D\+\_\+\+W\+R\+SR}~0x01
+\item 
+\mbox{\Hypertarget{sds__memory_8c_a4698f32dc07b7654db37be31ee10ada6}\label{sds__memory_8c_a4698f32dc07b7654db37be31ee10ada6}} 
+\#define {\bfseries Q\+S\+P\+I\+\_\+\+S\+T\+D\+\_\+\+C\+M\+D\+\_\+\+R\+S\+T\+EN}~0x66
+\item 
+\mbox{\Hypertarget{sds__memory_8c_a2fefba92725637b2669ba7514f8c6fe5}\label{sds__memory_8c_a2fefba92725637b2669ba7514f8c6fe5}} 
+\#define {\bfseries Q\+S\+P\+I\+\_\+\+S\+T\+D\+\_\+\+C\+M\+D\+\_\+\+R\+ST}~0x99
+\item 
+\mbox{\Hypertarget{sds__memory_8c_adfdbcb8a3b1af6c6975040f434857d6b}\label{sds__memory_8c_adfdbcb8a3b1af6c6975040f434857d6b}} 
+\#define {\bfseries Q\+S\+P\+I\+\_\+\+T\+E\+S\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}~4096
+\item 
+\mbox{\Hypertarget{sds__memory_8c_a39ccd80bab28bff07181ccd91bde966c}\label{sds__memory_8c_a39ccd80bab28bff07181ccd91bde966c}} 
+\#define {\bfseries S\+E\+S\+S\+I\+O\+N\+\_\+\+I\+N\+F\+O\+\_\+\+B\+L\+O\+C\+K\+\_\+\+I\+N\+D\+EX}~1
+\item 
+\mbox{\Hypertarget{sds__memory_8c_a9f7f9933f0f33ecdbd311e08119b2bd1}\label{sds__memory_8c_a9f7f9933f0f33ecdbd311e08119b2bd1}} 
+\#define {\bfseries M\+I\+N\+\_\+\+B\+L\+O\+C\+K\+\_\+\+I\+N\+D\+EX}~2
+\item 
+\mbox{\Hypertarget{sds__memory_8c_aa57749fcd3f3f946e9aaf6d2c98787f3}\label{sds__memory_8c_aa57749fcd3f3f946e9aaf6d2c98787f3}} 
+\#define {\bfseries M\+A\+X\+\_\+\+B\+L\+O\+C\+K\+\_\+\+I\+N\+D\+EX}~16384
+\item 
+\#define {\bfseries W\+A\+I\+T\+\_\+\+F\+O\+R\+\_\+\+P\+E\+R\+I\+PH}()
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sds__memory_8c_ac42d98e42e6acfe14f9d4a2ba5f323c5}\label{sds__memory_8c_ac42d98e42e6acfe14f9d4a2ba5f323c5}} 
+{\bfseries N\+R\+F\+\_\+\+L\+O\+G\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+R\+E\+G\+I\+S\+T\+ER} ()
+\item 
+\mbox{\Hypertarget{sds__memory_8c_a4b23bd0d3667ef719c84bfc4e7dc2a59}\label{sds__memory_8c_a4b23bd0d3667ef719c84bfc4e7dc2a59}} 
+static void \mbox{\hyperlink{sds__memory_8c_a4b23bd0d3667ef719c84bfc4e7dc2a59}{configure\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em configures qspi and memory \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a5e1042a8071cb5f4c40eb30d51290cfe}\label{sds__memory_8c_a5e1042a8071cb5f4c40eb30d51290cfe}} 
+static void \mbox{\hyperlink{sds__memory_8c_a5e1042a8071cb5f4c40eb30d51290cfe}{qspi\+\_\+handler}} (nrf\+\_\+drv\+\_\+qspi\+\_\+evt\+\_\+t event, void $\ast$p\+\_\+context)
+\begin{DoxyCompactList}\small\item\em called when a read/write/erase is done \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a3fbcacd2470e158293db14380082e827}\label{sds__memory_8c_a3fbcacd2470e158293db14380082e827}} 
+static uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_a3fbcacd2470e158293db14380082e827}{erase\+\_\+block}} (void)
+\begin{DoxyCompactList}\small\item\em erases block at block index \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_af0d175abb9e9f8f59bec6cca81c22470}\label{sds__memory_8c_af0d175abb9e9f8f59bec6cca81c22470}} 
+static uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_af0d175abb9e9f8f59bec6cca81c22470}{erase\+\_\+all}} (void)
+\begin{DoxyCompactList}\small\item\em erases entire memory. takes very long \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a47a279fdbc356c4da481ea5e63e1e7f7}\label{sds__memory_8c_a47a279fdbc356c4da481ea5e63e1e7f7}} 
+static uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_a47a279fdbc356c4da481ea5e63e1e7f7}{write\+\_\+buffer\+\_\+to\+\_\+block}} (void)
+\begin{DoxyCompactList}\small\item\em writes tx buffer to current block \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a2239ca7646b90409092eeb3675be937d}\label{sds__memory_8c_a2239ca7646b90409092eeb3675be937d}} 
+static uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_a2239ca7646b90409092eeb3675be937d}{read\+\_\+block\+\_\+to\+\_\+buffer}} (void)
+\begin{DoxyCompactList}\small\item\em reads current block to rx buffer \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a4f0d33a9aacb25111e015c612560573d}\label{sds__memory_8c_a4f0d33a9aacb25111e015c612560573d}} 
+static uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_a4f0d33a9aacb25111e015c612560573d}{verify\+\_\+write}} (void)
+\begin{DoxyCompactList}\small\item\em checks that write buffer and read buffer match \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a9531fe9b3ab160bcba7db5261de420c7}\label{sds__memory_8c_a9531fe9b3ab160bcba7db5261de420c7}} 
+static void \mbox{\hyperlink{sds__memory_8c_a9531fe9b3ab160bcba7db5261de420c7}{inc\+\_\+block\+\_\+index}} (void)
+\begin{DoxyCompactList}\small\item\em increments block index \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a418b19c97173d808f8373d2ef0098b5b}\label{sds__memory_8c_a418b19c97173d808f8373d2ef0098b5b}} 
+static void \mbox{\hyperlink{sds__memory_8c_a418b19c97173d808f8373d2ef0098b5b}{reset\+\_\+block\+\_\+index}} (void)
+\begin{DoxyCompactList}\small\item\em moves block index back to minimum value \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a6e3a856155e5d51537af6ae29dacae9b}\label{sds__memory_8c_a6e3a856155e5d51537af6ae29dacae9b}} 
+static void {\bfseries print\+\_\+read\+\_\+buffer} (void)
+\item 
+\mbox{\Hypertarget{sds__memory_8c_a96382b72f76496bb1edf1dfdf75e08fe}\label{sds__memory_8c_a96382b72f76496bb1edf1dfdf75e08fe}} 
+static void \mbox{\hyperlink{sds__memory_8c_a96382b72f76496bb1edf1dfdf75e08fe}{timestamp\+\_\+block}} (timestamp\+\_\+ms\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em adds timestamp to block \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_ad47850670abce6ea7f9d41c2a7e5d61d}\label{sds__memory_8c_ad47850670abce6ea7f9d41c2a7e5d61d}} 
+static void \mbox{\hyperlink{sds__memory_8c_ad47850670abce6ea7f9d41c2a7e5d61d}{initialize\+\_\+block}} (void)
+\begin{DoxyCompactList}\small\item\em resets block address pointer and erases block, sets up block to be timestamped \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_ae181f0a2798ac642f1126723b910b86f}\label{sds__memory_8c_ae181f0a2798ac642f1126723b910b86f}} 
+static void \mbox{\hyperlink{sds__memory_8c_ae181f0a2798ac642f1126723b910b86f}{read\+\_\+session\+\_\+info}} (\mbox{\hyperlink{structsession__info__t}{session\+\_\+info\+\_\+t}} $\ast$p\+\_\+session\+\_\+info)
+\begin{DoxyCompactList}\small\item\em read session info from the session info block \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a0430dde9576ee38c9748625611c7a133}\label{sds__memory_8c_a0430dde9576ee38c9748625611c7a133}} 
+static void \mbox{\hyperlink{sds__memory_8c_a0430dde9576ee38c9748625611c7a133}{write\+\_\+session\+\_\+info}} (\mbox{\hyperlink{structsession__info__t}{session\+\_\+info\+\_\+t}} $\ast$p\+\_\+session\+\_\+info)
+\begin{DoxyCompactList}\small\item\em writes session info to the session info block \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_a241a7d679eead91c004b44c3a705af45}\label{sds__memory_8c_a241a7d679eead91c004b44c3a705af45}} 
+static void \mbox{\hyperlink{sds__memory_8c_a241a7d679eead91c004b44c3a705af45}{stream\+\_\+motion\+\_\+block}} (void)
+\begin{DoxyCompactList}\small\item\em reads data from block and generates S\+D\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+V\+T\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+D\+A\+TA event until reaches end of block \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_ad7f70639ad359c1113af86ed38a0b0d9}{sds\+\_\+mem\+\_\+init}} (\mbox{\hyperlink{structmemory__init__s}{memory\+\_\+init\+\_\+s}} $\ast$p\+\_\+memory\+\_\+init)
+\begin{DoxyCompactList}\small\item\em initializes qspi drivers, configures memory, and sets up callback \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_aafde41f305447b96c208b7b05ffcb2a9}{sds\+\_\+mem\+\_\+start\+\_\+session}} (\mbox{\hyperlink{structsession__info__t}{session\+\_\+info\+\_\+t}} $\ast$p\+\_\+session\+\_\+info)
+\begin{DoxyCompactList}\small\item\em starts memory session and allows for motion data to be saved \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_a26ca120ee0c05b46ff35855451635da4}{sds\+\_\+mem\+\_\+stop\+\_\+session}} (void)
+\begin{DoxyCompactList}\small\item\em starts memory session, data will be available through the callback when ready \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_a1980203c5907cb1de48a3446c97de335}{sds\+\_\+mem\+\_\+save\+\_\+motion\+\_\+data}} (\mbox{\hyperlink{structmotion__sample__t}{motion\+\_\+sample\+\_\+t}} $\ast$p\+\_\+motion\+\_\+sample)
+\begin{DoxyCompactList}\small\item\em saves motion data to the next location in memory \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_acf69dc6f7afbe2a4fec914612e8bf13b}{sds\+\_\+mem\+\_\+start\+\_\+stream}} (void)
+\begin{DoxyCompactList}\small\item\em starts memory stream, data will be available through the callback on S\+D\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+V\+T\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+D\+A\+TA event \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{sds__memory_8c_a2d9d4bd21b9d62c8329d8ec48c6886e4}{sds\+\_\+mem\+\_\+stop\+\_\+stream}} (void)
+\begin{DoxyCompactList}\small\item\em stops memory stream \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sds__memory_8c_a70ef42d52a3db7305b5a94e0f4b45831}\label{sds__memory_8c_a70ef42d52a3db7305b5a94e0f4b45831}} 
+static uint8\+\_\+t \mbox{\hyperlink{sds__memory_8c_a70ef42d52a3db7305b5a94e0f4b45831}{m\+\_\+buffer\+\_\+tx}} \mbox{[}Q\+S\+P\+I\+\_\+\+T\+E\+S\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE\mbox{]}
+\begin{DoxyCompactList}\small\item\em Write buffer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_aa22bee4682f8440b071eedf8d94ec54c}\label{sds__memory_8c_aa22bee4682f8440b071eedf8d94ec54c}} 
+static uint8\+\_\+t \mbox{\hyperlink{sds__memory_8c_aa22bee4682f8440b071eedf8d94ec54c}{m\+\_\+buffer\+\_\+rx}} \mbox{[}Q\+S\+P\+I\+\_\+\+T\+E\+S\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE\mbox{]}
+\begin{DoxyCompactList}\small\item\em Read buffer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sds__memory_8c_aa6fb8c0351e84d60b5e61d195cd586a0}\label{sds__memory_8c_aa6fb8c0351e84d60b5e61d195cd586a0}} 
+static \mbox{\hyperlink{structmemory__control__block__t}{memory\+\_\+control\+\_\+block\+\_\+t}} \mbox{\hyperlink{sds__memory_8c_aa6fb8c0351e84d60b5e61d195cd586a0}{cb}}
+\begin{DoxyCompactList}\small\item\em hold memory control info \end{DoxyCompactList}\item 
+const uint8\+\_\+t \mbox{\hyperlink{sds__memory_8c_a3ae8935c5c14e0b69b6c778d83d2c759}{data\+\_\+size\+\_\+lookup}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Lookup for getting data size in each motion mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{sds__memory_8c_afd1179cd432dc9f09442304947dc9b2f}\label{sds__memory_8c_afd1179cd432dc9f09442304947dc9b2f}} 
+\index{sds\_memory.c@{sds\_memory.c}!WAIT\_FOR\_PERIPH@{WAIT\_FOR\_PERIPH}}
+\index{WAIT\_FOR\_PERIPH@{WAIT\_FOR\_PERIPH}!sds\_memory.c@{sds\_memory.c}}
+\subsubsection{\texorpdfstring{WAIT\_FOR\_PERIPH}{WAIT\_FOR\_PERIPH}}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+F\+O\+R\+\_\+\+P\+E\+R\+I\+PH(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do} \{ \(\backslash\)}
+\DoxyCodeLine{        while (!\mbox{\hyperlink{sds__memory_8c_aa6fb8c0351e84d60b5e61d195cd586a0}{cb}}.m\_finished) \{\} \(\backslash\)}
+\DoxyCodeLine{        cb.m\_finished = \textcolor{keyword}{false};    \(\backslash\)}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{while} (0)}
+
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{sds__memory_8c_ad7f70639ad359c1113af86ed38a0b0d9}\label{sds__memory_8c_ad7f70639ad359c1113af86ed38a0b0d9}} 
+\index{sds\_memory.c@{sds\_memory.c}!sds\_mem\_init@{sds\_mem\_init}}
+\index{sds\_mem\_init@{sds\_mem\_init}!sds\_memory.c@{sds\_memory.c}}
+\subsubsection{\texorpdfstring{sds\_mem\_init()}{sds\_mem\_init()}}
+{\footnotesize\ttfamily uint32\+\_\+t sds\+\_\+mem\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmemory__init__s}{memory\+\_\+init\+\_\+s}} $\ast$}]{p\+\_\+memory\+\_\+init }\end{DoxyParamCaption})}
+
+
+
+initializes qspi drivers, configures memory, and sets up callback 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+memory\+\_\+init} & pointer to init structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{sds__memory_8c_a1980203c5907cb1de48a3446c97de335}\label{sds__memory_8c_a1980203c5907cb1de48a3446c97de335}} 
+\index{sds\_memory.c@{sds\_memory.c}!sds\_mem\_save\_motion\_data@{sds\_mem\_save\_motion\_data}}
+\index{sds\_mem\_save\_motion\_data@{sds\_mem\_save\_motion\_data}!sds\_memory.c@{sds\_memory.c}}
+\subsubsection{\texorpdfstring{sds\_mem\_save\_motion\_data()}{sds\_mem\_save\_motion\_data()}}
+{\footnotesize\ttfamily uint32\+\_\+t sds\+\_\+mem\+\_\+save\+\_\+motion\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmotion__sample__t}{motion\+\_\+sample\+\_\+t}} $\ast$}]{p\+\_\+motion\+\_\+sample }\end{DoxyParamCaption})}
+
+
+
+saves motion data to the next location in memory 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+motion\+\_\+sample} & sample to be saved \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{sds__memory_8c_aafde41f305447b96c208b7b05ffcb2a9}\label{sds__memory_8c_aafde41f305447b96c208b7b05ffcb2a9}} 
+\index{sds\_memory.c@{sds\_memory.c}!sds\_mem\_start\_session@{sds\_mem\_start\_session}}
+\index{sds\_mem\_start\_session@{sds\_mem\_start\_session}!sds\_memory.c@{sds\_memory.c}}
+\subsubsection{\texorpdfstring{sds\_mem\_start\_session()}{sds\_mem\_start\_session()}}
+{\footnotesize\ttfamily uint32\+\_\+t sds\+\_\+mem\+\_\+start\+\_\+session (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsession__info__t}{session\+\_\+info\+\_\+t}} $\ast$}]{p\+\_\+session\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+starts memory session and allows for motion data to be saved 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+session\+\_\+info} & contains runtime motion configuration info \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{sds__memory_8c_acf69dc6f7afbe2a4fec914612e8bf13b}\label{sds__memory_8c_acf69dc6f7afbe2a4fec914612e8bf13b}} 
+\index{sds\_memory.c@{sds\_memory.c}!sds\_mem\_start\_stream@{sds\_mem\_start\_stream}}
+\index{sds\_mem\_start\_stream@{sds\_mem\_start\_stream}!sds\_memory.c@{sds\_memory.c}}
+\subsubsection{\texorpdfstring{sds\_mem\_start\_stream()}{sds\_mem\_start\_stream()}}
+{\footnotesize\ttfamily uint32\+\_\+t sds\+\_\+mem\+\_\+start\+\_\+stream (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+starts memory stream, data will be available through the callback on S\+D\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+V\+T\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+D\+A\+TA event 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{sds__memory_8c_a26ca120ee0c05b46ff35855451635da4}\label{sds__memory_8c_a26ca120ee0c05b46ff35855451635da4}} 
+\index{sds\_memory.c@{sds\_memory.c}!sds\_mem\_stop\_session@{sds\_mem\_stop\_session}}
+\index{sds\_mem\_stop\_session@{sds\_mem\_stop\_session}!sds\_memory.c@{sds\_memory.c}}
+\subsubsection{\texorpdfstring{sds\_mem\_stop\_session()}{sds\_mem\_stop\_session()}}
+{\footnotesize\ttfamily uint32\+\_\+t sds\+\_\+mem\+\_\+stop\+\_\+session (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+starts memory session, data will be available through the callback when ready 
+
+stops memory session
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{sds__memory_8c_a2d9d4bd21b9d62c8329d8ec48c6886e4}\label{sds__memory_8c_a2d9d4bd21b9d62c8329d8ec48c6886e4}} 
+\index{sds\_memory.c@{sds\_memory.c}!sds\_mem\_stop\_stream@{sds\_mem\_stop\_stream}}
+\index{sds\_mem\_stop\_stream@{sds\_mem\_stop\_stream}!sds\_memory.c@{sds\_memory.c}}
+\subsubsection{\texorpdfstring{sds\_mem\_stop\_stream()}{sds\_mem\_stop\_stream()}}
+{\footnotesize\ttfamily uint32\+\_\+t sds\+\_\+mem\+\_\+stop\+\_\+stream (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+stops memory stream 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{sds__memory_8c_a3ae8935c5c14e0b69b6c778d83d2c759}\label{sds__memory_8c_a3ae8935c5c14e0b69b6c778d83d2c759}} 
+\index{sds\_memory.c@{sds\_memory.c}!data\_size\_lookup@{data\_size\_lookup}}
+\index{data\_size\_lookup@{data\_size\_lookup}!sds\_memory.c@{sds\_memory.c}}
+\subsubsection{\texorpdfstring{data\_size\_lookup}{data\_size\_lookup}}
+{\footnotesize\ttfamily const uint8\+\_\+t data\+\_\+size\+\_\+lookup\mbox{[}3\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    (16),   }
+\DoxyCodeLine{    (40),   }
+\DoxyCodeLine{    (12),   }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Lookup for getting data size in each motion mode. 
+

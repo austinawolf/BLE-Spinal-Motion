@@ -104,38 +104,8 @@ static void on_write_rsp(ble_motion_c_t * p_ble_motion_c, const ble_evt_t * p_bl
     tx_buffer_process();
 }
 
-
-static uint32_t motion_decode(const ble_gattc_evt_hvx_t * hvx, ble_motion_c_evt_t * ble_motion_c_evt, motion_sample_t * p_motion_sample) {
-		
-	p_motion_sample->data_flags = hvx->data[1];
-	p_motion_sample->event = hvx->data[2];
-	
-	if (p_motion_sample->data_flags & IMU_DATA) {	
-		//imu
-		memcpy(p_motion_sample->gyro, &hvx->data[3],6);
-		memcpy(p_motion_sample->accel, &hvx->data[9],6);
-	}
-	if (p_motion_sample->data_flags & QUATERNION_DATA) {	
-		//quat
-		memcpy(p_motion_sample->quat, &hvx->data[3],16);
-	}
-	if (p_motion_sample->data_flags & COMPASS_DATA) {
-		//compass
-		memcpy(p_motion_sample->compass, &hvx->data[3],6);
-	}
-	if (p_motion_sample->data_flags & TIMESTAMP_DATA) {
-		//timestamp
-		memcpy(&p_motion_sample->timestamp, &hvx->data[3],4);
-	}
-
-	
-	return NRF_SUCCESS;
-}
-
 static void on_hvx(ble_motion_c_t * p_ble_motion_c, const ble_evt_t * p_ble_evt)
-{
-	int err_code;
-	
+{	
 	// Check if the event is on the link for this instance
     if (p_ble_motion_c->conn_handle != p_ble_evt->evt.gattc_evt.conn_handle)
     {
@@ -150,17 +120,14 @@ static void on_hvx(ble_motion_c_t * p_ble_motion_c, const ble_evt_t * p_ble_evt)
     if (p_ble_evt->evt.gattc_evt.params.hvx.handle == p_ble_motion_c->peer_motion_db.motionm_handle)
     {
         ble_motion_c_evt_t ble_motion_c_evt;
+        ble_motion_c_evt.conn_handle = p_ble_motion_c->conn_handle;
+        ble_motion_c_evt.evt_type = BLE_MOTION_C_EVT_NOTIFICATION;
 
-        ble_motion_c_evt.conn_handle                 = p_ble_motion_c->conn_handle;
-
-        NRF_LOG_INFO("Hvx Rx:");		
-        NRF_LOG_HEXDUMP_INFO(p_ble_evt->evt.gattc_evt.params.hvx.data, p_ble_evt->evt.gattc_evt.params.hvx.len);		
-		for (int i = 0; i < p_ble_evt->evt.gattc_evt.params.hvx.len; i++) {
-            err_code = app_fifo_put(p_ble_motion_c->p_uart_fifo, p_ble_evt->evt.gattc_evt.params.hvx.data[i]);
-            APP_ERROR_CHECK(err_code);
-        }
-        err_code = app_fifo_put(p_ble_motion_c->p_uart_fifo, '\n');
+        sds_notif_t notif;
+        notif.p_data = p_ble_evt->evt.gattc_evt.params.hvx.data;
+        notif.len  = p_ble_evt->evt.gattc_evt.params.hvx.len;
         
+        p_ble_motion_c->evt_handler(p_ble_motion_c, &ble_motion_c_evt, &notif);
     }
 }
 
@@ -247,7 +214,6 @@ uint32_t ble_motion_c_init(ble_motion_c_t * p_ble_motion_c, ble_motion_c_init_t 
     err_code =  sd_ble_uuid_vs_add(&orientation_base_uuid, &orientation_uuid.type);
 	
     p_ble_motion_c->evt_handler                 = p_ble_motion_c_init->evt_handler;
-    p_ble_motion_c->p_uart_fifo                 = p_ble_motion_c_init->p_uart_fifo;
     p_ble_motion_c->conn_handle                 = BLE_CONN_HANDLE_INVALID;
     p_ble_motion_c->peer_motion_db.motionm_cccd_handle = BLE_GATT_HANDLE_INVALID;
     p_ble_motion_c->peer_motion_db.motionm_handle      = BLE_GATT_HANDLE_INVALID;
@@ -259,6 +225,11 @@ uint32_t ble_motion_c_init(ble_motion_c_t * p_ble_motion_c, ble_motion_c_init_t 
 
 uint32_t motion_command_write(ble_motion_c_t * p_motion_c, uint8_t * payload, uint8_t len)
 {
+    if (p_motion_c->peer_motion_db.motionm_handle == BLE_GATT_HANDLE_INVALID) {
+        return BLE_ERROR_INVALID_ATTR_HANDLE;
+    }
+    
+    
 	NRF_LOG_INFO("Preamble: 0x%x", payload[0]);
 	NRF_LOG_INFO("Command: 0x%x",  payload[1]);
 	NRF_LOG_INFO("Length: %d", payload[2]);
@@ -277,7 +248,7 @@ uint32_t motion_command_write(ble_motion_c_t * p_motion_c, uint8_t * payload, ui
 	};
 		
 	//send value
-	NRF_LOG_DEBUG("Sending Command on Connection Handle 0x%x, Command Handle 0x%x",p_motion_c->conn_handle, p_motion_c->peer_motion_db.command_handle);
+	NRF_LOG_DEBUG("Sending Command on Connection Handle 0x%x, Command Handle 0x%x",p_motion_c->conn_handle, p_motion_c->peer_motion_db.motionm_handle);
 	return sd_ble_gattc_write(p_motion_c->conn_handle, &gattc_write);
 }
 

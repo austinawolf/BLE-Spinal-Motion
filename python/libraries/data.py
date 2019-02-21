@@ -1,16 +1,15 @@
-from serial_interface import SerialStream
+import sys
+import math
+
+#sds python libraries
 import error
-from time import sleep
-import click
-import codecs
-
-TIMEOUT_S = 2
-WAIT_TIME_S = 0.1
-DATA_TRAILER = '0d'
-DATA_PREAMBLE = "0xaa"
-MIN_DATA_LEN = 4
+from logger import _print, _print_bytes, bytes_to_string, APP, ERROR, WARNING, DEBUG
+from notif import Notif
+from vector import Vector
 
 
+#Defs
+DATA_PREAMBLE = b"\xaa"
 
 #Data flag masks
 QUATERNION_DATA     =   (1<<0)
@@ -19,44 +18,74 @@ COMPASS_DATA 	    =   (1<<2)
 TIMESTAMP_DATA 	    =	(1<<3)
 SESSION_INFO_DATA   =   (1<<4)
 MEMORY_DATA         =   (1<<5)
+EULER_DATA          =   (1<<7)
+
+class Euler(object):
+
+    def __init__(self, q0, q1, q2, q3):
+        magnitude = math.sqrt(q0 ** 2 + q1 ** 2 + q2 ** 2 + q3 ** 2)
+        self.q0 = float(q0) / magnitude
+        self.q1 = float(q1) / magnitude
+        self.q2 = float(q2) / magnitude
+        self.q3 = float(q3) / magnitude
+
+    def magnitude(self):
+        return math.sqrt(self.q0 ** 2 + self.q1 ** 2 + self.q2 ** 2 + self.q3 ** 2)
+
+    @property
+    def roll(self):
+        return math.atan2(2*(self.q0*self.q1 + self.q2*self.q3), 1 - 2 * (self.q1*self.q1 + self.q2*self.q2)) * 57.29
+
+    @property
+    def pitch(self):
+        return math.asin(2*(self.q0*self.q2 - self.q3*self.q1)) * 57.29
+
+    @property
+    def yaw(self):
+        return math.atan2(2*(self.q0*self.q3 + self.q1*self.q2), 1 - 2 * (self.q2*self.q2 + self.q3*self.q3)) * 57.29
+        
+    def __str__(self):   
+        return "{0:6.2f},{1:6.2f},{2:6.2f}".format(self.roll, self.pitch, self.yaw)     
+
+    def print(self):   
+        _print("\rEuler: x={0:6.2f}, y={1:6.2f}, z={2:6.2f}".format(self.roll, self.pitch, self.yaw), APP)  
 
 class Timestamp():
 
-    def __init__(self):
-        self.line_length = 3
-        self.timestamp = None
-    
-    def load_timestamp(self, timestamp):
-        self.timestamp = timestamp
+    def __init__(self, args):
+        self.length_bytes = 4
+        
+        if len(args) != self.length_bytes:
+            raise error.DataLenErr
+        
+        try:
+            self.timestamp = int.from_bytes(args,byteorder='little',signed=False)
+        except Exception as e:
+            raise error.DataParseEr
        
     def __str__(self):
-        return str(TIMESTAMP_DATA) + "," \
-            + str(self.timestamp)
+        return str(self.timestamp)
             
 class Imu():
 
     def __init__(self, args):
-        self.line_length = 8
-        self.ax = None
-        self.ay = None
-        self.az = None
-        self.gx = None
-        self.gy = None
-        self.gz = None
-                
-    def load_accel(self, x, y, z):
-        self.ax = int(x)
-        self.ay = int(y)
-        self.az = int(z)
+        self.length_bytes = 12
+        if len(args) != self.length_bytes:
+            raise error.DataLenErr
         
-    def load_gyro(self, x, y, z):
-        self.gx = int(x)
-        self.gy = int(y)
-        self.gz = int(z)
+        try:
+            self.ax = int.from_bytes(args[0:2],byteorder='little',signed=True)
+            self.ay = int.from_bytes(args[2:4],byteorder='little',signed=True)
+            self.az = int.from_bytes(args[4:6],byteorder='little',signed=True)
+            self.gx = int.from_bytes(args[6:8],byteorder='little',signed=True)
+            self.gy = int.from_bytes(args[8:10],byteorder='little',signed=True)
+            self.gz = int.from_bytes(args[10:12],byteorder='little',signed=True)
+            
+        except Exception as e:
+            raise error.DataParseErr
         
     def __str__(self):   
-        return str(IMU_DATA) + "," \
-            + str(self.ax) + "," \
+        return str(self.ax) + "," \
             + str(self.ay) + "," \
             + str(self.az) + "," \
             + str(self.gx) + "," \
@@ -65,42 +94,45 @@ class Imu():
             
 class Compass():
 
-    def __init__(self):
-        self.line_length = 5
-        self.cx = None
-        self.cy = None
-        self.cz = None
+    def __init__(self, args):
+        self.length_bytes = 6
         
-    def load_compass(self, x, y, z):
-        self.cx = int(x)
-        self.cy = int(y)
-        self.cz = int(z)
+        if len(args) != self.length_bytes:
+            raise error.DataLenErr
+        
+        try:
+            self.cx = int.from_bytes(args[0:2],byteorder='little',signed=True)
+            self.cy = int.from_bytes(args[2:4],byteorder='little',signed=True)
+            self.cz = int.from_bytes(args[4:6],byteorder='little',signed=True)
+        except Exception as e:
+            raise error.DataParseError
 
     def __str__(self):   
-        return str(COMPASS_DATA) + "," \
-            + str(self.cx) + "," \
+        return str(self.cx) + "," \
             + str(self.cy) + "," \
             + str(self.cz)
                 
 class Quaternion():
 
     def __init__(self, args):
-        self.raw_arg_length = 6
-        if len(args) != self.line_length
+        self.length_bytes = 16
         
-        self.q0 = None
-        self.q1 = None
-        self.q2 = None
-        self.q3 = None
+        if len(args) != self.length_bytes:
+            raise error.DataLenErr
         
-    def load_quat(self, q0, q1, q2, q3):
-        self.q0 = int(q0)
-        self.q1 = int(q1)
-        self.q2 = int(q2)
-        self.q3 = int(q3)
-
+        try:
+            self.q0 = int.from_bytes(args[0:4],byteorder='little',signed=True)
+            self.q1 = int.from_bytes(args[4:8],byteorder='little',signed=True)
+            self.q2 = int.from_bytes(args[8:12],byteorder='little',signed=True)
+            self.q3 = int.from_bytes(args[12:16],byteorder='little',signed=True)
+        except Exception as e:
+            raise error.DataParseErr
+        
+        self.euler = Euler(self.q0, self.q1, self.q2, self.q2)
+        self.euler.print()
+        
     def __str__(self):   
-        return str(QUATERNION_DATA) + "," \
+        return str(self.euler) + "," \
             + str(self.q0) + "," \
             + str(self.q1) + "," \
             + str(self.q2) + "," \
@@ -108,57 +140,58 @@ class Quaternion():
 
 class Data():
 
-    def __init__(self, line):
-    
-        self.byte_list = []
-        self.status = error.SUCCESS
-        self.sample = None 
+    def __init__(self):    
+        notif = Notif()
+        notif.receive()
+        self.bytes = notif.get()
+        self.motion = None
         
-        for byte in line:
-            self.byte_list.append(hex(byte))
-            return
-
-        if self.byte_list[0] == DATA_PREAMBLE:
-            self.status = error.PREAMBLE_ERR
-            return
-        
-        if self.byte_list[-1] != DATA_TRAILER:
-            self.status = error.TRAILER_ERR
-            return
-
-        if len(self.byte_list) < MIN_DATA_LEN:
-            self.status = error.DATA_LEN_ERR
-            return
-
+        #check preabmle
+        self.preamble = self.bytes[0]
+        if (self.preamble != DATA_PREAMBLE[0]):
+            _print("Invalid Data Preamble.", ERROR)
+            raise error.PreambleErr
             
-        self.data_flags         = self.byte_list[1]
-        self.packet_num         = self.byte_list[2]  
-        self.raw_data           = self.byte_list[3:]
-    
+        #get opcode
+        self.data_flags = self.bytes[1]
+        
+        #get length and check
+        self.packet_number = self.bytes[2]
+            
+        #check arg length       
+        self.args = self.bytes[3:]
+
+                 
+        self.parse()
+        self.print() 
+        
     def parse(self):
-        click.echo(self.args)
     
         #depending on packet type load data
         if (self.data_flags & QUATERNION_DATA):          
-            self.sample = Quaternion(self.args)                   
+            self.motion = Quaternion(self.args)                   
         elif (self.data_flags & IMU_DATA):
-            self.sample = Imu(self.args)                         
+            self.motion = Imu(self.args)                         
         elif (self.data_flags & COMPASS_DATA):
-            self.sample = Compass(self.args)                           
+            self.motion = Compass(self.args)                           
         elif (self.data_flags & TIMESTAMP_DATA):
-            self.sample = Timestamp(self.args)                              
+            self.motion = Timestamp(self.args)                              
         else:
-            self.status = DATA_FLAG_ERROR
+            raise error.DataFlagErr
         
-
     def print(self):
-        click.echo("Response")
-        click.echo("  Opcode: " + self.opcode)
-        click.echo("  Err Code: " + self.err_code)
-        click.echo("  Arg Len: " + str(self.arg_len))
-        click.echo("  Args: " + str(self.args))
+        _print("Data: ", DEBUG)      
+        _print("\tPreamble=" + hex(self.preamble), DEBUG)        
+        _print("\tData Flags=" + hex(self.data_flags), DEBUG)
+        _print("\tPacket Number=" + str(self.packet_number), DEBUG)        
+        _print_bytes("\tArgs=",self.args, DEBUG)
+        _print("\tMotion=" + str(self.motion),DEBUG)
 
 
-
+    def save(self, _file):
+        line = str(self.packet_number) \
+            + "," + str(self.data_flags) \
+            + "," + str(self.motion)
+        _file.write(line)
         
         

@@ -7659,7 +7659,7 @@
 // <i> and scheme with retry is applied again.
 
 #ifndef NRF_LOG_BACKEND_RTT_TX_RETRY_CNT
-#define NRF_LOG_BACKEND_RTT_TX_RETRY_CNT 3
+#define NRF_LOG_BACKEND_RTT_TX_RETRY_CNT 1
 #endif
 
 // </e>

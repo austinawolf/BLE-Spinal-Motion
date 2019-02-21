@@ -1,88 +1,90 @@
-from serial_interface import SerialStream
-import error
-from time import sleep
-import click
-import codecs
+import sys
 
-COMMAND_TRAILER = '0d'
-RESPONSE_TRAILER = '0xa'
-PAYLOAD_PREAMBLE = "0xbb"
-RESPONSE_PREAMBLE = "0xcc"
+#sds python libraries
+sys.path.append('..\libraries')
+from logger import _print, _print_bytes, bytes_to_string, APP, ERROR, WARNING, DEBUG
+from notif import Notif
+import error
+
+COMMAND_PREAMBLE = b"\xbb"
+RESPONSE_PREAMBLE = b"\xcc"
+DATA_PREAMBLE = b"\xaa"
+
+# Payloads
+START_SESSION_BLE = b"\x26\x01\x01"
+START_SESSION_MEMORY = b"\x26\x01\x02"
+START_SESSION_BLE_AND_MEMORY = b"\x26\x01\x03"
+STOP_SESSION = b"\x27\x00"
+START_STREAM = b"\x27\x00"
+STOP_STREAM = b"\x27\x00"
+GET_FW_VERSION = b"\x20\x00"
+
+
  
 class Command():
 
     def __init__(self, payload):
-        self.status = error.SUCCESS
-        self.payload = None
-        
-        # Parse payload
-        if payload[0:4] != PAYLOAD_PREAMBLE:
-            self.status = PREAMBLE_ERR
-            return
-
-        click.echo("Payload: ")
-        click.echo("  " + payload)
-
-        payload = payload.replace("0x","")   
-        payload = payload + COMMAND_TRAILER    
-        payload_hex = codecs.decode(payload,"hex")    
+        _print("Sending Command, Payload=: " + str(payload), DEBUG)
     
-        self.payload = payload_hex
-
-    def send(self, serial):      
-        serial.writeStream(self.payload)
-
-       
+        self.bytes = COMMAND_PREAMBLE + payload
+        
+        #check preabmle
+        self.preamble = self.bytes[0]
+  
+        #get opcode
+        self.opcode = self.bytes[1]
+        
+        #get length and check
+        self.length = self.bytes[2]
+            
+        #check arg length       
+        self.args = self.bytes[3:3+self.length]
+              
+        self.print()
+        
+        notif = Notif()
+        notif.set(self.bytes)
+        notif.send()        
+        
+        
+    def print(self):
+        _print("Command: ", APP)      
+        _print("\tPreamble=" + hex(self.preamble), APP)        
+        _print("\tOpcode=" + hex(self.opcode), APP)
+        _print("\tLength=" + str(self.length), APP)        
+        _print_bytes("\tArgs=",self.args, APP)        
+ 
 class Response():
 
-
-    def __init__(self, serial):
-        self.status = error.SUCCESS
-        self.line = None
+    def __init__(self):    
+        notif = Notif()
+        notif.receive()
+        self.bytes = notif.get()
         
-        #check buffer
-        line = serial.readStream()
-        if line != b'':            
-            self.line = line                   
-        else:
-            click.echo("Response Timeout.")
-            self.status = error.TIMEOUT_ERR
-    
-    def parse(self):
-    
-        self.byte_list = []
-        
-        for byte in self.line:
-            self.byte_list.append(hex(byte))
-
-        if self.byte_list[0] != RESPONSE_PREAMBLE:
-            self.status = error.PREAMBLE_ERR
-            return
-        
-        if self.byte_list[-1] != RESPONSE_TRAILER:
-            click.echo(self.byte_list)
-            self.status = error.TRAILER_ERR
-            return
+        #check preabmle
+        self.preamble = self.bytes[0]
+        if (self.preamble != RESPONSE_PREAMBLE[0]):
+            _print("Invalid Response Preamble.", WARNING)
+            raise error.PreambleErr
             
-        self.opcode     = self.byte_list[1]
-        self.err_code   = self.byte_list[2]  
-        self.arg_len    = int(self.byte_list[3],16)
-        self.args       = self.byte_list[4:-1]          
+        #get opcode
+        self.opcode = self.bytes[1]
         
-
+        #get length and check
+        self.length = self.bytes[2]
+            
+        #check arg length       
+        self.args = self.bytes[3:3+self.length]
+        
+        self.print() 
+        
     def print(self):
-        click.echo("Response:")
-        click.echo("  Opcode: " + self.opcode)
-        click.echo("  Err Code: " + self.err_code)
-        click.echo("  Arg Len: " + str(self.arg_len))
-        click.echo("  Args: " + str(self.args))
-
-
-class Custom(Command):
-
-    pass
+        _print("Response: ", APP)      
+        _print("\tPreamble=" + hex(self.preamble), APP)        
+        _print("\tOpcode=" + hex(self.opcode), APP)
+        _print("\tLength=" + str(self.length), APP)        
+        _print_bytes("\tArgs=",self.args, APP)        
         
         
-
-        
+      
         

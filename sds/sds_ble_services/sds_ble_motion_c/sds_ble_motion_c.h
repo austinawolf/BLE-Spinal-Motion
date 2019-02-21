@@ -73,8 +73,7 @@ NRF_SDH_BLE_OBSERVER(_name ## _obs,                                             
 typedef enum
 {
     BLE_MOTION_C_EVT_DISCOVERY_COMPLETE = 1,  	/**< Event indicating that the Heart Rate Service has been discovered at the peer. */
-    BLE_MOTION_C_EVT_MOTION_NOTIFICATION,        /**< Event indicating that a notification of the Heart Rate Measurement characteristic has been received from the peer. */
-    BLE_MOTION_C_EVT_RESPONSE_NOTIFICATION,
+    BLE_MOTION_C_EVT_NOTIFICATION,
 } ble_motion_c_evt_type_t;
 
 /** @} */
@@ -129,7 +128,6 @@ typedef struct
 {
     uint16_t motionm_cccd_handle;  /**< Handle of the CCCD of the Heart Rate Measurement characteristic. */
     uint16_t motionm_handle;       /**< Handle of the Heart Rate Measurement characteristic as provided by the SoftDevice. */
-	uint16_t command_handle;
 } motion_db_t;
 
 /**@brief Heart Rate Event structure. */
@@ -175,7 +173,6 @@ struct ble_motion_c_s
     uint16_t                conn_handle;      /**< Connection handle as provided by the SoftDevice. */
     motion_db_t             peer_motion_db;      /**< Handles related to MOTION on the peer*/
     ble_motion_c_evt_handler_t evt_handler;      /**< Application event handler to be called when there is an event related to the heart rate service. */
-    app_fifo_t *              p_uart_fifo;
 };
 
 /**@brief Heart Rate Client initialization structure.

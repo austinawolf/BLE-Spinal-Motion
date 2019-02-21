@@ -48,7 +48,10 @@ typedef struct {
 	uint8_t * 			p_args;
 } sds_response_t;
 
-
+typedef struct {
+    const uint8_t * p_data;
+    uint8_t len;
+} sds_notif_t;
 
 
 

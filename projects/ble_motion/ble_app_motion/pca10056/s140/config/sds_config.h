@@ -23,7 +23,7 @@
 // <2=> Compass Only
 
 #ifndef SDS_MOTION_CONFIG_MODE
-#define SDS_MOTION_CONFIG_MODE 0
+#define SDS_MOTION_CONFIG_MODE 1
 #endif
 
 // <o> Default Quaternion/IMU Sample Rate

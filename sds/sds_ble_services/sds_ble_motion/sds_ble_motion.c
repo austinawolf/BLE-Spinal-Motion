@@ -359,7 +359,7 @@ static uint8_t imu_encode(uint8_t * packet, int16_t * gyro, int16_t * accel, uin
 	packet[2] = packet_num++;
 	memcpy(&packet[3], gyro, 6);
 	memcpy(&packet[9], accel, 6);
-	return 19;
+	return 15;
 }
 
 static uint8_t compass_encode(uint8_t * packet, int16_t * compass, uint8_t data_flags) {

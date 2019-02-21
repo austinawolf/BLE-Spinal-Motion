@@ -80,6 +80,8 @@ static app_fifo_t uart_fifo;
 // Create a buffer for the FIFO
 const uint16_t fifo_buffer_size = 128;
 uint8_t fifo_buffer[fifo_buffer_size];
+const uint8_t serial_trailer[] = {0x0a, 0x0d};
+const uint8_t serial_preamble[] = {0xee};
 
 
 /**@brief Macro to unpack 16bit unsigned UUID from octet stream. */
@@ -236,7 +238,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         case BLE_GAP_EVT_CONNECTED:
         {
             NRF_LOG_INFO("Connected.");
-
+    
             // Discover peer's services.
             err_code = ble_db_discovery_start(&m_db_disc, p_ble_evt->evt.gap_evt.conn_handle);
             APP_ERROR_CHECK(err_code);
@@ -254,7 +256,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         {
             NRF_LOG_INFO("Disconnected, reason 0x%x.",
                          p_gap_evt->params.disconnected.reason);
-
+            
             err_code = bsp_indication_set(BSP_INDICATE_IDLE);
             APP_ERROR_CHECK(err_code);
 
@@ -511,56 +513,33 @@ static void motion_c_evt_handler(ble_motion_c_t * p_motion_c, ble_motion_c_evt_t
             APP_ERROR_CHECK(err_code);
         } break;
 
-        case BLE_MOTION_C_EVT_MOTION_NOTIFICATION:
+        case BLE_MOTION_C_EVT_NOTIFICATION:
         {
-			motion_sample_t * p_motion_sample = p_context;
-			
-			if (p_motion_sample->data_flags & IMU_DATA) {
-				/* imu */
-				printf("Packet,%u,%u,%d,%d,%d,%d,%d,%d\n\r", p_motion_sample->event,p_motion_sample->data_flags,p_motion_sample->gyro[0],p_motion_sample->gyro[1],p_motion_sample->gyro[2],p_motion_sample->accel[0],p_motion_sample->accel[1],p_motion_sample->accel[2]);
-			}
-			if (p_motion_sample->data_flags & QUATERNION_DATA) {
-				/* quaternion */
-				printf("Packet,%u,%u,%ld,%ld,%ld,%ld\n\r", p_motion_sample->event, p_motion_sample->data_flags, (long) p_motion_sample->quat[0], (long) p_motion_sample->quat[1], (long) p_motion_sample->quat[2],(long) p_motion_sample->quat[3]);
-			}
-			if (p_motion_sample->data_flags & COMPASS_DATA) {
-				/* compass */
-				printf("Packet,%u,%u,%d,%d,%d\n\r", p_motion_sample->event,p_motion_sample->data_flags,p_motion_sample->compass[0],p_motion_sample->compass[1],p_motion_sample->compass[2]);
-			}			
-			if (p_motion_sample->data_flags & TIMESTAMP_DATA) {
-				/* timestamp */
-				printf("Packet,%u,%u,%ld\n\r", p_motion_sample->event,p_motion_sample->data_flags,p_motion_sample->timestamp);
-			}			
+            
+            
+			sds_notif_t * p_notif = p_context;
+			            
+            err_code = app_fifo_put(&uart_fifo, serial_preamble[0]);
+            APP_ERROR_CHECK(err_code);           
+            err_code = app_fifo_put(&uart_fifo, p_notif->len);
+            APP_ERROR_CHECK(err_code);
+            
+            for (int i = 0; i < p_notif->len; i++) {
+                
+                err_code = app_fifo_put(&uart_fifo, p_notif->p_data[i]);
+                APP_ERROR_CHECK(err_code);
+                                
+            }
+            
+            err_code = app_fifo_put(&uart_fifo, serial_trailer[0]);
+            APP_ERROR_CHECK(err_code);
+                        err_code = app_fifo_put(&uart_fifo, serial_trailer[1]);
+            APP_ERROR_CHECK(err_code);
+            
+        			
         } break;
 
-		case BLE_MOTION_C_EVT_RESPONSE_NOTIFICATION:
-        {
-			sds_response_t * p_response = p_context;			
-			
-			NRF_LOG_INFO("Response Recieved.");
-			NRF_LOG_INFO("Preamble: 0x%x", p_response->preamble);
-			NRF_LOG_INFO("Command: 0x%x",  p_response->opcode);
-			NRF_LOG_INFO("Err Code: 0x%x",  p_response->err_code);			
-			NRF_LOG_INFO("Arg Length: %d", p_response->arg_len);
-			if (p_response->arg_len > 0) {
-				NRF_LOG_INFO("Arguments:");	
-				NRF_LOG_HEXDUMP_INFO(p_response->p_args,p_response->arg_len);
-			}
-			
-			/** 
-			* Serial Packet Structure (Seperated by Commas):
-			* Arg1 	(Preamble)				"Resp"
-			* Arg2 	(Opcode 				0x00-0x2A @ref sds_opcode_t
-			* Arg3 	(Err Code)	 			0x00-0xFF @ref sds_return_t
-			* Arg4 	(Arguments Length)	 	0-16
-			* Arg5+ (Args)					0x00-0xFF 				
-			*/
-			printf("Resp,%d,%d,%d",p_response->opcode,p_response->err_code,p_response->arg_len);
-			for (int i = 0; i < p_response->arg_len; i++) {
-				printf(",%d",p_response->p_args[i]);
-			}
-			printf("\n");			
-        } break;
+
 		
         default:
             break;
@@ -617,7 +596,6 @@ static void motion_c_init(void)
     ble_motion_c_init_t motion_c_init_obj;
 
     motion_c_init_obj.evt_handler = motion_c_evt_handler;
-    motion_c_init_obj.p_uart_fifo = &uart_fifo;
     ret_code_t err_code = ble_motion_c_init(&m_motion_c, &motion_c_init_obj);
     APP_ERROR_CHECK(err_code);
 }
@@ -1002,7 +980,13 @@ static void send_serial_command(void) {
         {				
             if (cr == 13) {
                 err_code = motion_command_write(&m_motion_c, serial_command_buffer, i);
-                APP_ERROR_CHECK(err_code);
+                if (err_code == BLE_ERROR_INVALID_ATTR_HANDLE) {
+                    NRF_LOG_WARNING("Central device not connected.");
+                }
+                else {
+                    APP_ERROR_CHECK(err_code);
+                }
+                
                 return;
             }
             serial_command_buffer[i++] = cr;

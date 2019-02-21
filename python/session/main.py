@@ -1,20 +1,23 @@
+#standard libraries
 import sys
-sys.path.append('..\libraries')
-from serial_interface import SerialStream
-from datetime import datetime 
-import math
-import keyboard
+
+#pip libraries
 import click
+
+#sds python libraries
+sys.path.append('..\libraries')
 import error
-import command
-import opcodes
-from time import sleep
+import payloads
+from logger import _print, APP, ERROR, WARNING, DEBUG
+from serial_interface import SerialInterface
+from file import File
+from command import Command, Response
+from data import Data
+from serial_packet import setup_serial
 
-TIMEOUT_S = 2
-WAIT_TIME_S = 0.1
+#global instances
+global g_file
 
-serial = SerialStream()
-    
 ### Custom Command ###  
 @click.command()
 @click.option('--port', prompt='Port',help='Serial COM Port Connected to Central Device')
@@ -25,86 +28,74 @@ def main(port, ble, memory, filename):
     """Starts a data session."""
         
     # Setup Serial
-    serial.configure(port=port, speed=1000000)
-    serial.run()    
-      
-    # Build Command
-    if (ble == True and memory == True):
-        cmd = command.Command(opcodes.START_SESSION_BLE_AND_MEMORY)
-    elif (ble == True):
-        cmd = command.Command(opcodes.START_SESSION_MEMORY)
-    elif (memory == True):
-        cmd = command.Command(opcodes.START_SESSION_BLE)
-    else:    
-        error.perror("Select a data destination (Use --ble or --memory. Type --help for more info).")
-        sys.exit()
-
+    setup_serial(port)
+    
     # Setup File
-
+    setup_file(filename)
     
     # Send Command
-    cmd.send(serial)
-    
-    # Check command for error
-    if error.check(cmd.status):
-        click.echo("Command Error:" + str(cmd.status))
-        sys.exit()
+    start_session(ble, memory)
+       
+    # Get Response
+    response = get_response()
 
-    # Wait for response
-    resp = command.Response(serial)
-
-    # Parse response
-    resp.parse()
-        
-    # Check response status code 
-    if error.check(resp.status):
-        click.echo("Response Error:" + str(resp.status))
-        sys.exit()
-    
-    # Print Response
-    resp.print()
-    
-    # Check response error code
-    if resp.err_code != "0x0":
-        sys.exit()
-        
-    # Collect Data
+    # Wait for data packets
     while (True):
+        
+        try:
+            # Get data
+            data = get_data()
+            data.save(g_file)
     
-        #check buffer
-        line = serial.readStream()
-        if line == b'':
-            continue
-        
-        click.echo(line)
-                
-        #parse line
-        data = Data(line)
-        
-        #check status
-        if error.check(data.status):
-            click.echo("Response Error:" + str(resp.status))
-            continue   
-        
-        #parse raw data
-        data.parse()
-        
-        #check status
-        if error.check(data.status):
-            click.echo("Response Error:" + str(resp.status))
-            continue         
-        
-        #if quat print and return
+        except KeyboardInterrupt:
+            _print("Keyboard Interrupt", DEBUG)
+            break       
+        except error.MyError as e:
+            raise e
     
-        
-        #save to file
-        
-        
-        #check for keyboard interrupt
-            
-            
-
-
+    end_session()
+    
+    # Wait for response packet
+    while (True):
+        try:
+            # Get Response
+            response = get_response()
+            break
+        except error.MyError:
+            continue             
+          
+    
+    # Clean up
+    g_file.close()
+    
+    
+    
+def setup_file(filename):
+    """ Sets up file for data logging """
+    global g_file
+    g_file = File(filename)
+    
+def start_session(ble, memory):
+    """ Sends a command to the peripheral """
+    _print("Staring Session.",DEBUG)   
+    Command(payloads.START_SESSION_BLE)
+    
+    
+def get_response():
+    """ Gets a response packet from peripheral """
+    _print("Getting Response.", DEBUG)  
+    return Response()
+    
+def get_data():
+    """ Gets a data packet from peripheral """
+    _print("Getting Data.", DEBUG)
+    return Data()
+    
+def end_session():
+    """ Ends the session by sending a command and closing file """
+    _print("Ending Session.", DEBUG)    
+    Command(payloads.STOP_SESSION)  
+    pass
 
     
 if __name__ == '__main__':
